@@ -11,15 +11,13 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//dbConnection();
+dbConnection();
 const PORT = 8080;
 
 app.get('/', (req, res) => {
-  res.send('Hello asd!')
+  res.send('Hello Minister!')
 });
 
-app.use("/usuarios", require('./src/routes/usuarios.routes'));
-app.use("/mensajes", require('./src/routes/mensajes.routes'));
 
 app.listen(PORT, () => {
   console.log('Server running on port ' + PORT);
