@@ -5,11 +5,11 @@ const { Schema } = mongoose;
 
 const FurnitureSchema = new Schema({
     name:String,
-    weight: String,
+    weight: Number,
     description:String,
-    dimensions:String,
+    dimensions:Number,
     category:String,
-    state:int,
+    state:Number,
     userId:{ type: mongoose.Schema.ObjectId, ref:'user'},
     warehouseId:{ type: mongoose.Schema.ObjectId, ref:'warehouse'},
     

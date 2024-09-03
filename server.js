@@ -18,6 +18,7 @@ app.get('/', (req, res) => {
   res.send('Hello Minister!')
 });
 
+app.use("/", require('./src/routes/furniture.routes'));
 
 app.listen(PORT, () => {
   console.log('Server running on port ' + PORT);
