@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const UserSchema = new Schema({
+const LogisticSchema = new Schema({
     originStreet:String,
     destinationStreet: String,
     cost: String,
@@ -13,7 +13,7 @@ const UserSchema = new Schema({
     workersId: [{type: int}] 
 });
 
-const User = mongoose.model('User',UserSchema);
+const User = mongoose.model('Logistic',LogisticSchema);
 
 
 module.exports = User;
