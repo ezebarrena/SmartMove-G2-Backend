@@ -1,6 +1,7 @@
-const VisitModel = require('../models/visit');
+const VisitModel = require("../models/visit");
 
 class VisitService {
+    
     async createVisit (visit) {
         try {
             await VisitModel.create(visit)
