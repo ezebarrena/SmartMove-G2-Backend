@@ -5,6 +5,7 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema({
     name:String,
+    lastName:String,
     email:String,
     favorites:[{ type: mongoose.Schema.ObjectId, ref:'Asset'}],
     
