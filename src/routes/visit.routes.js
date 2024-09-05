@@ -4,7 +4,7 @@ const visitController = require("../controllers/visit.controller")
 const router = Router()
 
 router.post("/visit/", visitController.createVisit)
-router.put('/visits/:id', visitController.updateVisit);
-router.delete('/visits/:id', visitController.deleteVisit);
+router.put('/visit/:id', visitController.updateVisit);
+router.delete('/visit/:id', visitController.deleteVisit);
 
 module.exports = router
