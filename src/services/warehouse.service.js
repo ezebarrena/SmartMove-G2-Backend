@@ -7,12 +7,36 @@ class WarehouseService{
     async postWarehouse(warehouse) {
         try {
 
-            await AssetModel.create(warehouse);
+            await WarehouseModel.create(warehouse);
             return warehouse;
 
         } catch (err) {
             console.error(err);
             throw new Error("Error in postWarehouse Service");
+        }
+    }
+
+    //da de baja un almacen
+    async deleteWarehouse(warehouse) {
+        try {
+
+            await WarehouseModel.deleteOne({ _id: warehouse });
+            return warehouse;
+
+        } catch (err) {
+            console.error(err);
+            throw new Error("Error in deleteWarehouse Service");
+        }
+    }
+
+    //retorna todos los warehouse
+    async getWarehouses() {
+        try {
+            const warehouse = await WarehouseModel.find({});
+            return warehouse;
+        } catch (err) {
+            console.error(err);
+            throw new Error("Error in getWarehouses Service");
         }
     }
 
@@ -22,17 +46,29 @@ class WarehouseService{
 
             if (id !== "") {
 
-                const warehouse = await AssetModel.find({ "_id": new mongoose.Types.ObjectId(id) });
+                const warehouse = await WarehouseModel.find({ "_id": new mongoose.Types.ObjectId(id) });
                 console.log(warehouse)
                 return warehouse;
             } else {
-                const warehouse = await AssetModel.find({ "_id": new mongoose.Types.ObjectId(id) });
+                const warehouse = await WarehouseModel.find({ "_id": new mongoose.Types.ObjectId(id) });
                 return warehouse;
             }
 
         } catch (err) {
             console.error(err);
             throw new Error("Error in getWarehouseById Service");
+        }
+    }
+
+    async deleteWarehouse(warehouse) {
+        try {
+
+            await WarehouseModel.deleteOne({ _id: warehouse });
+            return warehouse;
+
+        } catch (err) {
+            console.error(err);
+            throw new Error("Error in deleteWarehouse Service");
         }
     }
 
