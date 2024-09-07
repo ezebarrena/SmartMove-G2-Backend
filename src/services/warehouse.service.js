@@ -60,6 +60,7 @@ class WarehouseService{
         }
     }
 
+    //elimina un almacen por su id
     async deleteWarehouse(warehouse) {
         try {
 
