@@ -6,4 +6,5 @@ const router = Router()
 
 router.post("/furniture/", furnitureController.uploadFurniture)
 
+
 module.exports = router

@@ -15,7 +15,7 @@ class RentController {
             let newRent = await rentService.uploadRent(req.body)
             return res.status(201).json({
                 message: "Created!",
-                Mobiliario: newFurniture,
+                Alquiler: newRent,
                 status: 201
             });
         }     
@@ -27,4 +27,27 @@ class RentController {
             });
         }
     }
+
+    async cancelRent(req, res) {
+        const rentId = req.params.rentId
+
+        try {
+            await rentService.cancelRent(rentId)
+            
+            return res.status(201).json({
+                message: "Canceled!",
+                status: 201
+            });
+
+        } catch(err){
+            console.error(err);
+
+            return res.status(500).json({
+                message: "Error canceling",
+                status: 500
+            });
+        }
+    }
 }
+
+module.exports = new RentController()

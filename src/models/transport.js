@@ -9,3 +9,5 @@ const TransportSchema = new Schema({
 })
 
 const Transport = mongoose.model('Transport', TransportSchema)
+
+module.exports = Transport
