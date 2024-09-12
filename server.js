@@ -19,8 +19,9 @@ app.get('/', (req, res) => {
 });
 
 app.use("/", require('./src/routes/furniture.routes'));
+app.use("/", require('./src/routes/visit.routes'));
 app.use("/", require('./src/routes/rent.routes'));
-//app.use("/", require('./src/routes/warehouse.routes'));
+app.use("/", require('./src/routes/warehouse.routes'));
 app.use("/", require('./src/routes/transport.routes'));
 
 app.listen(PORT, () => {
