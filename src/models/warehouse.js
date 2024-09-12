@@ -4,8 +4,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const WarehouseSchema = new Schema({
-    dwarehouseLocation: String,
-    
+    warehouseLocation: String,
 });
 
 const Warehouse = mongoose.model('Warehouse',WarehouseSchema);

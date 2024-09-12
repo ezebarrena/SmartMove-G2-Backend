@@ -1,83 +1,83 @@
 let instance = null;
 require('dotenv').config();
-const WarehouseService = require("../services/warehouse.service");
+const WorkerService = require("../services/worker.service");
 
-class WarehouseController {
+class WorkerController {
     static getInstance() {
         if(!instance) {
-            return new WarehouseController();
+            return new WorkerController();
         }
         return instance;
     }
 
-    async getWarehouse(req, res) {
+    async getWorker(req, res) {
         try {
-          const warehouse = await WarehouseService.getWarehouses();
+          const worker = await WorkerService.getWorkers();
           return res.status(200).json({
             message: "all warehouses bringed",
-            warehouse: warehouse,
+            worker: worker,
             status: 200,
           });
         } catch (err) {
           console.error(err);
           return res.status(500).json({
-            method: "getWarehouse",
+            method: "getWorker",
             message: "Server error",
           });
         }
     }
 
-    async getWarehouseById(req, res) {
+    async getWorkerById(req, res) {
         try {
-          const WarehouseID = req.body._id;
-          const warehouse = await WarehouseService.getWarehouseById(WarehouseID);
+          const WorkerID = req.body._id;
+          const worker = await WorkerService.getWorkerById(WorkerID);
           return res.status(200).json({
-            message: "Warehouse by Id bringed",
-            warehouse: warehouse,
+            message: "Worker by Id bringed",
+            worker: worker,
             status: 200,
           });
         } catch (err) {
           console.error(err);
           return res.status(500).json({
-            method: "getWarehouseById",
+            method: "getWorkerById",
             message: "Server error",
           });
         }
     }
 
-    async postWarehouse(req, res) {
+    async postWorker(req, res) {
         try {
-          let newWarehouse = await WarehouseService.postWarehouse(req.body);
+          let newWorker = await WorkerService.postWorker(req.body);
     
           return res.status(200).json({
-            message: "Warehouse published correctly!",
-            warehouse: newWarehouse,
+            message: "Worker published correctly!",
+            worker: newWorker,
             status: 201
           });
         } catch (err) {
           console.error(err);
           return res.status(409).json({
-            method: "postWarehouse",
+            method: "postWorker",
             message: err,
             status: 500
           });
         }
     }
 
-    async deleteWarehouse(req, res) {
-        const WarehouseID = req.body.id; //object id? posible cambio
+    async deleteWorker(req, res) {
+        const WorkerID = req.body.id; 
     
         try {
-          await WarehouseService.deleteWarehouse(WarehouseID);
+          await WorkerService.deleteWorker(WorkerID);
     
           return res.status(200).json({
-            message: "Warehouse deleted correclty",
+            message: "Worker deleted correclty",
             status: 200,
           });
         } catch (err) {
           console.error(err);
           return res.status(500).json({
-            method: "deleteWarehouse",
+            method: "deleteWorker",
             message: "Server error",
             status: 500,
           });
@@ -86,4 +86,4 @@ class WarehouseController {
 
 
 }
-module.exports = WarehouseController.getInstance();
+module.exports = WorkerController.getInstance();
