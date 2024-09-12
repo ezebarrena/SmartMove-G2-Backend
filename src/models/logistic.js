@@ -13,7 +13,7 @@ const LogisticSchema = new Schema({
     workersId: [{type: int}] 
 });
 
-const User = mongoose.model('Logistic',LogisticSchema);
+const Logistic = mongoose.model('Logistic',LogisticSchema);
 
 
-module.exports = User;
+module.exports = Logistic;
