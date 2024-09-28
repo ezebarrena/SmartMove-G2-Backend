@@ -1,6 +1,5 @@
 const { Router } = require ("express")
 const assetController = require("../controllers/asset.controller")
-const visitsController = require("../controllers/visits.controller")
 
 const router = Router()
 

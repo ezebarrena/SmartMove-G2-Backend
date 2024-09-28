@@ -13,10 +13,11 @@ class VisitController {
 
     async createVisit(req, res) {
         try {
-            let newVisit = await visitService.createVisit(req.body)
+            const visitData = req.body;
+            let newVisit = await visitService.createVisit(visitData)
             return res.status(201).json({
                 message: "Visit Created!",
-                Visit: newVisit,
+                Visit: visitData,
                 status: 201
             });
         }

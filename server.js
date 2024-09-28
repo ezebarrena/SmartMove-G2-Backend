@@ -23,6 +23,8 @@ app.use("/", require('./src/routes/visit.routes'));
 app.use("/", require('./src/routes/rent.routes'));
 app.use("/", require('./src/routes/warehouse.routes'));
 app.use("/", require('./src/routes/transport.routes'));
+app.use("/", require('./src/routes/user.routes'))
+app.use("/", require('./src/routes/asset.routes'))
 
 app.listen(PORT, () => {
   console.log('Server running on port ' + PORT);

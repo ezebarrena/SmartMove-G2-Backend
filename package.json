@@ -13,8 +13,11 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "ical-generator": "^8.0.0",
+    "ics": "^3.8.1",
     "mongodb": "^6.8.0",
     "mongoose": "^8.6.0",
+    "nodemailer": "^6.9.15",
     "nodemon": "^3.1.4",
     "smartmove-g2-backend": "file:"
   }

@@ -1,14 +1,21 @@
 const VisitModel = require("../models/visit");
+const sendMessageEmail = require ('../utils/mailInvite')
+const UserModel = require("../models/user");
+const mongoose = require('mongoose');
 
 class VisitService {
     
     async createVisit (visit) {
         try {
+            //TODO: get Mail del usuario a traves de su ID
+            let user = await UserModel.findOne({"_id": new mongoose.Types.ObjectId(visit.userId)})
+
             await VisitModel.create(visit)
+            await sendVisitInvitationEmail(user.email)
         }
         catch (err) {
             console.error(err);
-            throw new Error ("Error uploading furniture")
+            throw new Error ("Error uploading visit")
         }
     }
 

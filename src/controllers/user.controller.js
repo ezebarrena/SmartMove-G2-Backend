@@ -43,4 +43,4 @@ class UserController {
     }
 }
 
-module.exports = new UserController().getInstance();
+module.exports = UserController.getInstance();
