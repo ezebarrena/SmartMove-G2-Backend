@@ -86,6 +86,10 @@ class VisitController {
             });
         }
     }
+
+    async getUserVisits(req, res) {
+        //TODO
+    }
 }
 
 module.exports = VisitController.getInstance();

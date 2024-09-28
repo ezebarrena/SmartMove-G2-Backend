@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-
-
 const { Schema } = mongoose;
 
 const FurnitureSchema = new Schema({
@@ -9,7 +7,7 @@ const FurnitureSchema = new Schema({
     description:String,
     dimensions:Number,
     category:String,
-    state:Number,
+    state:Number, //0: En casa origen; 1: En deposito, 2: En Casa destino
     userId:{ type: mongoose.Schema.ObjectId, ref:'user'},
     warehouseId:{ type: mongoose.Schema.ObjectId, ref:'warehouse'},
     

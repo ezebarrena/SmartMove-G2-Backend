@@ -5,5 +5,6 @@ const router = Router()
 
 
 router.post("/transport/", transportController.uploadTransport)
+//GET TRANSPORT
 
 module.exports = router

@@ -9,6 +9,7 @@ const LogisticSchema = new Schema({
     cost: String,
     totalWeight: int,
     date: Date,
+    type: Number, //0: los muebles van de una casa a otra, 1: muebles pasan por un deposito
     furnitures: [{ type: mongoose.Schema.ObjectId, ref:'furniture'}],
     workersId: [{type: int}] 
 });
