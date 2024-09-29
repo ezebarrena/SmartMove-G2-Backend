@@ -41,6 +41,15 @@ class UserController {
             res.status(500).json({ message: error.message });
         }
     }
+
+    async findUserById(req, res) {
+        try {
+            const user = await userService.findUserById(req.params.id);
+            res.status(200).json(user);
+        } catch (error) {
+            res.status(404).json({ message: error.message });
+        }
+    }
 }
 
 module.exports = UserController.getInstance();

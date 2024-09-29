@@ -9,9 +9,9 @@ router.post("/warehouses", warehouseController.postWarehouse);
 router.get("/warehouses", warehouseController.getWarehouse);
 
 //obtener warehouse por id
-router.post("/idwarehouses", warehouseController.getWarehouseById);
+router.get("/warehouses/:id", warehouseController.getWarehouseById);
 
 //eliminar warehouse
-router.delete("/warehouses", warehouseController.deleteWarehouse);
+router.delete("/warehouses/:id", warehouseController.deleteWarehouse);
 
 module.exports = router

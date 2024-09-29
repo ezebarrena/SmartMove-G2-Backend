@@ -32,6 +32,18 @@ class UserService {
             throw new Error(`Error al eliminar el usuario: ${error.message}`);
         }
     }
+
+    async findUserById(id) {
+        try {
+            const user = await UserModel.findById(id);
+            if (!user) {
+                throw new Error('Usuario no encontrado');
+            }
+            return user;
+        } catch (error) {
+            throw new Error(`Error al buscar el usuario: ${error.message}`);
+        }
+    }
 }
 
 module.exports = new UserService();
