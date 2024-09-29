@@ -67,6 +67,50 @@ class FurnitureController {
             });
         }
     }
+
+    async getFurnitureByUser(req, res) {
+        try {
+            const userId = req.params.userId;
+            const furnitureList = await furnitureService.getFurnitureByUser(userId);
+            return res.status(200).json({
+                message: "Furniture found!",
+                Mobiliario: furnitureList,
+                status: 200
+            });
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({
+                method: "getFurnitureByUser",
+                status: 500,
+                error: err.message
+            });
+        }
+    }
+
+    async getFurnitureById(req, res) {
+        try {
+            const id = req.params.id;
+            const furniture = await furnitureService.getFurnitureById(id);
+            if (!furniture) {
+                return res.status(404).json({
+                    message: "Furniture not found",
+                    status: 404
+                });
+            }
+            return res.status(200).json({
+                message: "Furniture found!",
+                Mobiliario: furniture,
+                status: 200
+            });
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({
+                method: "getFurnitureById",
+                status: 500,
+                error: err.message
+            });
+        }
+    }
 }
 
 module.exports = FurnitureController.getInstance();

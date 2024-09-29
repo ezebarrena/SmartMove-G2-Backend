@@ -3,12 +3,19 @@ const furnitureController = require("../controllers/furniture.controller")
 
 const router = Router()
 
+//crear furniture
+router.post("/furniture/", furnitureController.createFurniture);
 
-router.post("/furniture/", furnitureController.createFurniture)
+//actualizar furniture
 router.put("/furniture/:id", furnitureController.updateFurniture);
-router.delete("/furniture/:id", furnitureController.deleteFurniture);
-//TODO: Get de todos los mobiliarios para un usuario en especifico
-//TODO: Get de un mobiliario en especifico por id
 
+//eliminar furniture
+router.delete("/furniture/:id", furnitureController.deleteFurniture);
+
+//obtener todos los mobiliarios para un usuario en especifico
+router.get("/furniture/user/:userId", furnitureController.getFurnitureByUser);
+
+//obtener un mobiliario especifico pasandole un id
+router.get("/furniture/:id", furnitureController.getFurnitureById);
 
 module.exports = router

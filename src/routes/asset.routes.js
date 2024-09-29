@@ -3,17 +3,16 @@ const assetController = require("../controllers/asset.controller")
 
 const router = Router()
 
-//Crear inmueble
-router.post("/assets", assetController.postAsset)
+//crear inmueble
+router.post("/assets", assetController.postAsset);
 
-//me trae assets
-router.get("/assets", assetController.getAsset)
+//obtener assets
+router.get("/assets", assetController.getAsset);
 
-//Eliminar un inmueble
-router.delete("/assets", assetController.deleteAsset)
+//eliminar inmueble
+router.delete("/assets", assetController.deleteAsset);
 
-//me trae un asset
-router.post("/idAssets", assetController.getAssetById)
-
+//obtener un asset por id
+router.post("/idAssets", assetController.getAssetById);
 
 module.exports = router;

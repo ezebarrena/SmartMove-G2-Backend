@@ -3,8 +3,10 @@ const transportController = require("../controllers/transport.controller")
 
 const router = Router()
 
+//crear transporte
+router.post("/transport/", transportController.uploadTransport);
 
-router.post("/transport/", transportController.uploadTransport)
-//GET TRANSPORT
+//obtener transporte
+router.get("/transport/:id", transportController.getTransportById);
 
 module.exports = router

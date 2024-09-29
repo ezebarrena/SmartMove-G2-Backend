@@ -39,6 +39,26 @@ class FurnitureService {
             throw new Error("Error deleting furniture");
         }
     }
+
+    async getFurnitureByUser(userId) {
+        try {
+            const furnitureList = await FurnitureModel.find({ user: ObjectId(userId) });
+            return furnitureList;
+        } catch (err) {
+            console.error(err);
+            throw new Error("Error fetching furniture for the user");
+        }
+    }
+
+    async getFurnitureById(id) {
+        try {
+            const furniture = await FurnitureModel.findById(id);
+            return furniture;
+        } catch (err) {
+            console.error(err);
+            throw new Error("Error fetching furniture by ID");
+        }
+    }
 }
 
 module.exports = new FurnitureService();
