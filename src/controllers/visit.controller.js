@@ -17,7 +17,7 @@ class VisitController {
             let newVisit = await visitService.createVisit(visitData)
             return res.status(201).json({
                 message: "Visit Created!",
-                Visit: visitData,
+                Visit: newVisit,
                 status: 201
             });
         }

@@ -6,8 +6,8 @@ const { Schema } = mongoose;
 const AssetSchema = new mongoose.Schema({
     type:String,
     description:String,
-    //streetName:String,
-    //streetNumber:Number,
+    streetName:String,
+    streetNumber:Number,
     location:String,
     userId:{ type: mongoose.Schema.ObjectId, ref:'user'},
 });

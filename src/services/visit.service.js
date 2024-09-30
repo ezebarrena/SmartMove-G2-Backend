@@ -1,5 +1,5 @@
 const VisitModel = require("../models/visit");
-const sendMessageEmail = require ('../utils/mailInvite')
+const sendVisitInvitationEmail = require ('../utils/mailInvite')
 const UserModel = require("../models/user");
 const mongoose = require('mongoose');
 
@@ -10,13 +10,16 @@ class VisitService {
             //TODO: get Mail del usuario a traves de su ID
             let user = await UserModel.findOne({"_id": new mongoose.Types.ObjectId(visit.userId)})
 
-            await VisitModel.create(visit)
+            const newVisit = await VisitModel.create(visit)
             await sendVisitInvitationEmail(user.email)
+
+            return newVisit
         }
         catch (err) {
             console.error(err);
             throw new Error ("Error uploading visit")
         }
+        
     }
 
     async updateVisit(visitId, visitData) {

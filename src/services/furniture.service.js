@@ -42,7 +42,7 @@ class FurnitureService {
 
     async getFurnitureByUser(userId) {
         try {
-            const furnitureList = await FurnitureModel.find({ user: ObjectId(userId) });
+            const furnitureList = await FurnitureModel.find({ userId: ObjectId(userId) });
             return furnitureList;
         } catch (err) {
             console.error(err);
