@@ -5,9 +5,10 @@ const FurnitureSchema = new Schema({
     name:String,
     weight: Number,
     description:String,
-    dimensions:Number,
+    dimensions:String,
     category:String,
     state:Number, //0: En casa origen; 1: En deposito, 2: En Casa destino
+    quantity: Number,
     userId:{ type: mongoose.Schema.ObjectId, ref:'user'},
     warehouseId:{ type: mongoose.Schema.ObjectId, ref:'warehouse'},
     
