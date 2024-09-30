@@ -11,7 +11,8 @@ const LogisticSchema = new Schema({
     date: Date,
     type: Number, //0: los muebles van de una casa a otra, 1: muebles pasan por un deposito
     furnitures: [{ type: mongoose.Schema.ObjectId, ref:'furniture'}],
-    workersId: [{type: int}] 
+    workersId: [{type: int}],
+    userId: {type: mongoose.Schema.ObjectId, ref:'user'}
 });
 
 const Logistic = mongoose.model('Logistic',LogisticSchema);
