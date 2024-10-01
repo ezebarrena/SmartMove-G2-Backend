@@ -5,6 +5,7 @@ class LogisticService {
     async createLogistic(logistic) {
         try {
             await LogisticModel.create(logistic)
+            return logistic;
         }catch (err) {
             console.error(err);
             throw new Error ("Error creating Logistic")
