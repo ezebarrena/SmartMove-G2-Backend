@@ -1,3 +1,4 @@
+const Logistic = require("../models/logistic")
 const logisticService = require("../services/logistic.service")
 
 let instance = null
@@ -16,7 +17,7 @@ class LogisticController {
             const newLogistic = await logisticService.createLogistic(req.body)
             return res.status(201).json({
                 message: "Created!",
-                Alquiler: newLogistic,
+                Logistic: newLogistic,
                 status: 201
             });
         } catch(err) {

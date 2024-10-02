@@ -4,7 +4,8 @@ class LogisticService {
 
     async createLogistic(logistic) {
         try {
-            await LogisticModel.create(logistic)
+            const newlogistic = await LogisticModel.create(logistic)
+            return newlogistic;
         }catch (err) {
             console.error(err);
             throw new Error ("Error creating Logistic")
