@@ -49,7 +49,7 @@ class LogisticService {
 
     async getLogisticsByUserId(userId) {
         try {
-            const logistics = await LogisticModel.find({ user: userId });
+            const logistics = await LogisticModel.find({ userId: userId });
             return logistics;
         } catch (err) {
             console.error(err);

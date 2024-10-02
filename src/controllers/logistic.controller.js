@@ -13,7 +13,7 @@ class LogisticController {
 
     async createLogistic(req, res){
         try {
-            let newLogistic = await logisticService.createLogistic(req.body)
+            const newLogistic = await logisticService.createLogistic(req.body)
             return res.status(201).json({
                 message: "Created!",
                 Alquiler: newLogistic,
