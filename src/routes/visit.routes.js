@@ -13,6 +13,9 @@ router.put('/visit/:id', visitController.updateVisit);
 router.delete('/visit/:id', visitController.deleteVisit);
 
 //obtener visitas para un usuario por id
-router.get('/visit/:userId', visitController.getUserVisits);
+router.get('/visit/user/:userId', visitController.getUserVisits);
+
+//obtener visitas para un asset por id
+router.get('/visit/asset/:assetId', visitController.getVisitByAssetId)
 
 module.exports = router

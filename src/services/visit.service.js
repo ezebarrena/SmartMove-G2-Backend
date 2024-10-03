@@ -60,6 +60,17 @@ class VisitService {
             throw new Error("Error al eliminar la visita");
         }
     }
+
+    async getVisitByAssetId(assetId) {
+        try {
+            const visits = await VisitModel.find({ assetId: new mongoose.Types.ObjectId(assetId) });
+            return visits;
+        } catch (err) {
+            console.error(err);
+            throw new Error("Error fetching visits by Asset ID");
+        }
+    }
+
 }
 
 module.exports = new VisitService();
