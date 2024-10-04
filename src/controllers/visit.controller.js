@@ -88,7 +88,22 @@ class VisitController {
     }
 
     async getUserVisits(req, res) {
-        //TODO
+       try {
+        const userId = req.params.userId;
+        const visits = await visitService.getVisitByUserId(userId);
+        return res.status(200).json({
+            message: "Visit found!",
+            data: visits,
+            status: 200,
+        });
+       } catch(err) {
+            console.error(err);
+            return res.status(500).json({
+                method: "getVisitByUserId",
+                status: 500,
+                error: err.message
+            });
+       }
     }
 
     async getVisitByAssetId (req, res) {

@@ -71,6 +71,16 @@ class VisitService {
         }
     }
 
+    async getVisitByUserId(userId) {
+        try {
+            const visits = await VisitModel.find({ userId: new mongoose.Types.ObjectId(userId) });
+            return visits;
+        } catch (err) {
+            console.error(err);
+            throw new Error("Error fetching visits by Asset ID");
+        }
+    }
+
 }
 
 module.exports = new VisitService();
