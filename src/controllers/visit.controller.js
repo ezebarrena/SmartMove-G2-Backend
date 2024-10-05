@@ -87,12 +87,26 @@ class VisitController {
         }
     }
 
-    async getUserVisits(req, res) {
-        //TODO
+    async getVisitsByUserId(req, res) {
+        try {
+            const userId = req.params.userId;
+            const visits = await visitService.getVisitsByUserId(userId);
+            return res.status(200).json({
+                message: "Visits found!",
+                Visits: visits,
+                status: 200
+            });
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({
+                method: "getVisitsByUserId",
+                status: 500,
+                error: err.message
+            });
+        }
     }
 
     async getVisitByAssetId (req, res) {
-        console.log("ENtro al controlador")
         try {
             const assetId = req.params.assetId;
             const visits = await visitService.getVisitByAssetId(assetId);
