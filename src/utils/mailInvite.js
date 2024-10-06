@@ -21,24 +21,33 @@ const transporter = nodemailer.createTransport({
   });
 
 
-  const sendVisitInvitationEmail = async (contactEmail) => {
+  const sendVisitInvitationEmail = async (contactEmail, visitDate, assetData) => {
+
+    //DATOS DEL INMUEBLE
+    const street = assetData.streetName
+    const streetNumber = assetData.streetNumber
+    const location = assetData.location
+
+    //DATOS DE LA VISITA
+    const year = visitDate.getFullYear();
+    const month = visitDate.getMonth() + 1; // Los meses empiezan desde 0, por eso sumamos 1
+    const day = visitDate.getDate()
+    const hour = visitDate.getHours()
 
     const event = {
-      start: [2024, 9, 30, 6, 30],
-      duration: { hours: 6, minutes: 30 },
+      start: [year, month, day, hour],
+      duration: { hours: 1},
       title: 'Visita Guiada',
       method:'REQUEST',
 
-      description: 'Annual 10-kilometer run in Boulder, Colorado',
-      location: 'Folsom Field, University of Colorado (finish line)',
-      geo: { lat: 40.0095, lon: 105.2669 },
-      categories: ['10k races', 'Memorial Day Weekend', 'Boulder CO'],
+      description: `Visita al inmbuebe ubicado en ${street} ${streetNumber}`,
+      location: `${street} ${streetNumber}, ${location}`,
       
-      organizer: { name: 'Admin', email: 'smartmovelogistic2@gmail.com' },
-      attendees: [
-        { email: 'ezebarrena@gmail.com', rsvp: true, role: 'REQ-PARTICIPANT' },
-       
-      ]
+      
+      
+      organizer: { name: 'SmartMove', email: 'smartmovelogistic2@gmail.com' },
+      attendees: { email: contactEmail, rsvp: true, role: 'REQ-PARTICIPANT' },
+      
     }
 
     ics.createEvent(event, (error, value) => {
@@ -46,7 +55,6 @@ const transporter = nodemailer.createTransport({
         console.log(error)
         return
       }
-    
       console.log(value)
       writeFileSync(`${__dirname}/event.ics`, value)
     })
@@ -56,8 +64,8 @@ const transporter = nodemailer.createTransport({
         
         from: process.env.USER,
         to: contactEmail, 
-        subject: `Prueba envio evento visita`,
-        text: "Prueba",
+        subject: `Invitacion a la visita `,
+        text: `Se le envia la invitacion para la visita a ${street} ${streetNumber}`,
         attachments: {
           filename:'event.ics',
           path: `${__dirname}/event.ics`
@@ -69,9 +77,4 @@ const transporter = nodemailer.createTransport({
     }
   }
   
-
-
-
-
-
   module.exports = sendVisitInvitationEmail;

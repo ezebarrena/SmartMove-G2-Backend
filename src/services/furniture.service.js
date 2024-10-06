@@ -1,7 +1,6 @@
 const FurnitureModel = require('../models/furniture');
 
 const mongoose = require('mongoose');
-const ObjectId = require('mongodb').ObjectId;
 
 class FurnitureService {
     async createFurniture (furniture) {
