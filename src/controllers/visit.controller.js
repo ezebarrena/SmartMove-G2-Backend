@@ -87,7 +87,7 @@ class VisitController {
         }
     }
 
-    async getUserVisits(req, res) {
+    async getVisitsByUserId(req, res) {
        try {
         const userId = req.params.userId;
         const visits = await visitService.getVisitByUserId(userId);
