@@ -37,5 +37,5 @@ jobs:
           export SERVICE="${{ secrets.SERVICE }}"
           export PORT="${{ secrets.PORT }}"
           npm install
-           forever start server.js &> output.log &
+          pm2 start server.js &> output.log &
         EOF
