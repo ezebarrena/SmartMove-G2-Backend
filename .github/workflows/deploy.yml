@@ -25,6 +25,9 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
           cd ${{ secrets.EC2_PATH }}
+          if [ -d "SmartMove-G2-Backend" ]; then
+            rm -rf SmartMove-G2-Backend
+          fi
           git clone https://github.com/ezebarrena/SmartMove-G2-Backend.git
           cd SmartMove-G2-Backend/
           export CONNECTION_STRING="${{ secrets.CONNECTION_STRING }}"
