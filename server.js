@@ -15,7 +15,7 @@ dbConnection();
 const PORT = 8080;
 
 app.get('/', (req, res) => {
-  res.send('Hello pepe!')
+  res.send('Hello server!')
 });
 
 app.use("/", require('./src/routes/furniture.routes'));
