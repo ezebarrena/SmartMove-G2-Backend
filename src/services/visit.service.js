@@ -11,9 +11,7 @@ class VisitService {
             let user = await UserModel.findOne({"_id": new mongoose.Types.ObjectId(visit.userId)})
             let asset = await AssetModel.findOne({"_id": new mongoose.Types.ObjectId(visit.assetId)})
 
-
             const newVisit = await VisitModel.create(visit)
-
 
             await sendVisitInvitationEmail(user.email, newVisit.visitDate, asset)
 

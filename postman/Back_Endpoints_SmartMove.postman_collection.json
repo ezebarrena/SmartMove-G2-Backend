@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "445fe8f4-ff70-4d37-a351-49980b225c27",
+		"_postman_id": "4022319c-69bf-429d-8f84-bdbf45ea469d",
 		"name": "Back_Endpoints_SmartMove",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"furniture prueba\",\r\n    \"weight\": 80,\r\n    \"description\": \"prueba\",\r\n    \"dimensions\": 110,\r\n    \"category\": \"uno\",\r\n    \"state\": 0\r\n}",
+					"raw": "{\r\n    \"name\" : \"fur\",\r\n    \"weight\": 345,\r\n    \"description\": \"furr\",\r\n    \"dimensions\": 130,\r\n    \"category\": \"uno\",\r\n    \"state\": 0\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -20,14 +20,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/furniture/",
+					"raw": "localhost:8080/furniture",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"furniture",
-						""
+						"furniture"
 					]
 				}
 			},
@@ -203,6 +202,126 @@
 					"path": [
 						"warehouses",
 						"66f94a5dc026ebc54c31e1e2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Logistic",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"originStreet\": \"calle uno\",\r\n    \"destinationStreet\": \"calle dos\",\r\n    \"cost\": \"250\",\r\n    \"totalWeight\": 400,\r\n    \"date\": \"09/11/2022\",\r\n    \"type\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/logistic",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"logistic"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Visit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"duration\": 100,\r\n    \"date\": \"10/18/2024\",\r\n    \"userId\": \"66f94577a424761c2fa05a40\",\r\n    \"assetId\": \"66f328ee25cdf304f6f26405\",\r\n    \"visitDate\":\"10/22/2024\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/visit/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"visit",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find All Assets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/assets",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Visit",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"duration\": 60,\r\n    \"date\": \"10/19/2024\",\r\n    \"state\": \"Confirmado\",\r\n    \"userId\": \"66f94577a424761c2fa05a40\",\r\n    \"assetId\": \"66f328ee25cdf304f6f26405\",\r\n    \"visitDate\":\"10/14/2024\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/visit/6716eb346ce5be6a7d9b1f6b",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"visit",
+						"6716eb346ce5be6a7d9b1f6b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Visit",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/visit/6716eb346ce5be6a7d9b1f6b",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"visit",
+						"6716eb346ce5be6a7d9b1f6b"
 					]
 				}
 			},
