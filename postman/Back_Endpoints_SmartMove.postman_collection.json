@@ -6,326 +6,435 @@
 	},
 	"item": [
 		{
-			"name": "Create Furniture",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"fur\",\r\n    \"weight\": 345,\r\n    \"description\": \"furr\",\r\n    \"dimensions\": 130,\r\n    \"category\": \"uno\",\r\n    \"state\": 0\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Furniture",
+			"item": [
+				{
+					"name": "Create Furniture",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"fur\",\r\n    \"weight\": 345,\r\n    \"description\": \"furr\",\r\n    \"dimensions\": 130,\r\n    \"category\": \"uno\",\r\n    \"state\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/furniture",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"furniture"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/furniture",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"furniture"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Create User",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"user 1\",\r\n    \"lastName\": \"user\",\r\n    \"email\": \"prueba@user\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Asset",
+			"item": [
+				{
+					"name": "Create Asset",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"type\": \"Inmueble\",\r\n  \"description\": \"Descripción del inmueble\",\r\n  \"streetName\": \"Calle Principal\",\r\n  \"streetNumber\": 123,\r\n  \"location\": \"Ciudad Ejemplo\",\r\n  \"userId\": \"66f3283e9e504c67d6ddcb19\", \r\n  \"dayAvailability\": [1, 2, 3, 4, 5], \r\n  \"hoursAvailability\": {\r\n    \"startHour\": 9, \r\n    \"endHour\": 17   \r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/assets",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"assets"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:8080/user",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"user"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete User",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/user/66f943838c0880c8912e0949",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"user",
-						"66f943838c0880c8912e0949"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Find User By Id",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/user/66f94577a424761c2fa05a40",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"user",
-						"66f94577a424761c2fa05a40"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create Transport",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"sizeLimit\": 20000,\r\n    \"weightLimit\": 40000,\r\n    \"fee\": 3\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Find All Assets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/assets",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"assets"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:8080/transport",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"transport"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create Warehouse",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"warehouseLocation\": \"loc1\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Update Asset By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"type\": \"Inmueble\",\r\n  \"description\": \"Desc\",\r\n  \"streetName\": \"Calle\",\r\n  \"streetNumber\": 123,\r\n  \"location\": \"Ciudad\",\r\n  \"userId\": \"66f3283e9e504c67d6ddcb19\", \r\n  \"dayAvailability\": [1, 2, 3, 4, 5], \r\n  \"hoursAvailability\": {\r\n    \"startHour\": 9, \r\n    \"endHour\": 17   \r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asset/67201a73ed1f731dbb906a7d",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asset",
+								"67201a73ed1f731dbb906a7d"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:8080/warehouses",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"warehouses"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Find All Warehouses",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/warehouses",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"warehouses"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Find Warehouse By Id",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/warehouses/66f94a5dc026ebc54c31e1e2",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"warehouses",
-						"66f94a5dc026ebc54c31e1e2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Warehouse By Id",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/warehouses/66f94a5dc026ebc54c31e1e2",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"warehouses",
-						"66f94a5dc026ebc54c31e1e2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create Logistic",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"originStreet\": \"calle uno\",\r\n    \"destinationStreet\": \"calle dos\",\r\n    \"cost\": \"250\",\r\n    \"totalWeight\": 400,\r\n    \"date\": \"09/11/2022\",\r\n    \"type\": 0\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Delete Asset",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/asset/671d4a7c56274d9ffa561833",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asset",
+								"671d4a7c56274d9ffa561833"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/logistic",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"logistic"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Create Visit",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"duration\": 100,\r\n    \"date\": \"10/18/2024\",\r\n    \"userId\": \"66f94577a424761c2fa05a40\",\r\n    \"assetId\": \"66f328ee25cdf304f6f26405\",\r\n    \"visitDate\":\"10/22/2024\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "User",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"user 1\",\r\n    \"lastName\": \"user\",\r\n    \"email\": \"prueba@user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/user",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:8080/visit/",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"visit",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Find All Assets",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/assets",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"assets"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Update Visit",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"duration\": 60,\r\n    \"date\": \"10/19/2024\",\r\n    \"state\": \"Confirmado\",\r\n    \"userId\": \"66f94577a424761c2fa05a40\",\r\n    \"assetId\": \"66f328ee25cdf304f6f26405\",\r\n    \"visitDate\":\"10/14/2024\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/user/66f943838c0880c8912e0949",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"66f943838c0880c8912e0949"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:8080/visit/6716eb346ce5be6a7d9b1f6b",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"visit",
-						"6716eb346ce5be6a7d9b1f6b"
-					]
+				{
+					"name": "Find User By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/user/66f94577a424761c2fa05a40",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"66f94577a424761c2fa05a40"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Delete Visit",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/visit/6716eb346ce5be6a7d9b1f6b",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"visit",
-						"6716eb346ce5be6a7d9b1f6b"
-					]
+			"name": "Warehouse",
+			"item": [
+				{
+					"name": "Create Warehouse",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"warehouseLocation\": \"loc1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/warehouses",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Warehouses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/warehouses",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Warehouse By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/warehouses/66f94a5dc026ebc54c31e1e2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouses",
+								"66f94a5dc026ebc54c31e1e2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Warehouse By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/warehouses/66f94a5dc026ebc54c31e1e2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouses",
+								"66f94a5dc026ebc54c31e1e2"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "Visit",
+			"item": [
+				{
+					"name": "Create Visit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"duration\": 100,\r\n    \"date\": \"10/18/2024\",\r\n    \"userId\": \"66f94577a424761c2fa05a40\",\r\n    \"assetId\": \"66f328ee25cdf304f6f26405\",\r\n    \"visitDate\":\"10/22/2024\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/visit/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"visit",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Visit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"duration\": 60,\r\n    \"date\": \"10/19/2024\",\r\n    \"state\": \"Confirmado\",\r\n    \"userId\": \"66f94577a424761c2fa05a40\",\r\n    \"assetId\": \"66f328ee25cdf304f6f26405\",\r\n    \"visitDate\":\"10/14/2024\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/visit/6716eb346ce5be6a7d9b1f6b",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"visit",
+								"6716eb346ce5be6a7d9b1f6b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Visit",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/visit/6716eb346ce5be6a7d9b1f6b",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"visit",
+								"6716eb346ce5be6a7d9b1f6b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transport",
+			"item": [
+				{
+					"name": "Create Transport",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sizeLimit\": 20000,\r\n    \"weightLimit\": 40000,\r\n    \"fee\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/transport",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transport"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Logistic",
+			"item": [
+				{
+					"name": "Create Logistic",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"originStreet\": \"calle uno\",\r\n    \"destinationStreet\": \"calle dos\",\r\n    \"cost\": \"250\",\r\n    \"totalWeight\": 400,\r\n    \"date\": \"09/11/2022\",\r\n    \"type\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/logistic",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"logistic"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

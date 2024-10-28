@@ -9,8 +9,11 @@ router.post("/assets", assetController.postAsset);
 //obtener assets
 router.get("/assets", assetController.getAsset);
 
+//actualizar inmueble
+router.put("/asset/:id", assetController.updateAssetById);
+
 //eliminar inmueble
-router.delete("/assets", assetController.deleteAsset);
+router.delete("/asset/:id" , assetController.deleteAsset);
 
 //obtener un asset por id
 router.post("/idAssets", assetController.getAssetById);

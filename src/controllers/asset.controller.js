@@ -49,6 +49,35 @@ class AssetController {
     }
   }
 
+  async updateAssetById(req, res) {
+    const assetId = req.params.id;
+    const assetData = req.body;
+  
+    try {
+      const updatedAsset = await AssetService.updateAssetById(assetId, assetData);
+      
+      if (!updatedAsset) {
+        return res.status(404).json({
+          message: "Asset not found",
+          status: 404,
+        });
+      }
+  
+      return res.status(200).json({
+        message: "Asset updated successfully",
+        asset: updatedAsset,
+        status: 200,
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        method: "updateAssetById",
+        message: "Server error",
+        status: 500,
+      });
+    }
+  }
+
   //publica inmueble
   async postAsset(req, res) {
     try {
@@ -71,13 +100,20 @@ class AssetController {
 
   //elimina inmueble
   async deleteAsset(req, res) {
-    const assetId = req.body.id; //object id? posible cambio
-
+    const assetId = req.params.id;
+  
     try {
-      await AssetService.deleteAsset(assetId);
-
+      const result = await AssetService.deleteAsset(assetId);
+  
+      if (!result) {
+        return res.status(404).json({
+          message: "Asset not found",
+          status: 404,
+        });
+      }
+  
       return res.status(200).json({
-        message: "Asset deleted correclty",
+        message: "Asset deleted correctly",
         status: 200,
       });
     } catch (err) {
@@ -89,7 +125,6 @@ class AssetController {
       });
     }
   }
-
 
 }
 module.exports = AssetController.getInstance();

@@ -1,6 +1,7 @@
 const AssetModel = require('../models/asset');
 const mongoose = require('mongoose');
 const ObjectId = require('mongodb').ObjectId;
+
 class AssetService {
 
     //trae todo los inmuebles
@@ -36,6 +37,23 @@ class AssetService {
         }
     }
 
+    async updateAssetById(assetId, assetData) {
+        try {
+          const updatedAsset = await AssetModel.findByIdAndUpdate(assetId, assetData, {
+            new: true,
+            runValidators: true
+          });
+          if (!updatedAsset) {
+            throw new Error("Asset not found");
+        }
+    
+          return updatedAsset;
+        } catch (err) {
+          console.error(err);
+          throw new Error("Error updating asset");
+        }
+      }
+
     //publica un inmueble
     async postAsset(asset) {
         try {
@@ -49,16 +67,15 @@ class AssetService {
     }
 
     //elimina un inmueble
-    async deleteAsset(asset) {
-        try {
-            await AssetModel.deleteOne({ _id: asset });
-            return asset;
-
-        } catch (err) {
-            console.error(err);
-            throw new Error("Error in deleteAsset Service");
-        }
-    }
+        async deleteAsset(assetId) {
+            try {
+              const result = await AssetModel.findByIdAndDelete(assetId); // Eliminar el activo por ID
+              return result; // Retornar el resultado de la eliminación
+            } catch (err) {
+              console.error(err);
+              throw new Error("Error deleting asset");
+            }
+          }     
     
 }
 
