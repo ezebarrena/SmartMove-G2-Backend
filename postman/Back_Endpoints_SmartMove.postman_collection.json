@@ -34,6 +34,92 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Find Furniture By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/furniture/66d66282e0b645b1a27c0840",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"furniture",
+								"66d66282e0b645b1a27c0840"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Furniture By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/furniture/67223747ad7a8f197441a4db",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"furniture",
+								"67223747ad7a8f197441a4db"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Furniture By User Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/furniture/user/66f3283e9e504c67d6ddcb19",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"furniture",
+								"user",
+								"66f3283e9e504c67d6ddcb19"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Furniture By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Silla de oficina\",\r\n    \"weight\": 10.5,\r\n    \"description\": \"Silla ergonómica con soporte lumbar.\",\r\n    \"dimensions\": \"60x60x90 cm\",\r\n    \"category\": \"Muebles de oficina\",\r\n    \"state\": 1,\r\n    \"quantity\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/furniture/66d66282e0b645b1a27c0840",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"furniture",
+								"66d66282e0b645b1a27c0840"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -127,6 +213,25 @@
 							"path": [
 								"asset",
 								"671d4a7c56274d9ffa561833"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Asset By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/asset/66f328ee25cdf304f6f26405",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asset",
+								"66f328ee25cdf304f6f26405"
 							]
 						}
 					},
@@ -376,6 +481,25 @@
 			"name": "Transport",
 			"item": [
 				{
+					"name": "Find Transport By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/transport/66f947d103c743a76499efe6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transport",
+								"66f947d103c743a76499efe6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Create Transport",
 					"request": {
 						"method": "POST",
@@ -397,6 +521,53 @@
 							"port": "8080",
 							"path": [
 								"transport"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Transport",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/transport/66f9488f73b7b7db0ab0e656",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transport",
+								"66f9488f73b7b7db0ab0e656"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Transport By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sizeLimit\": 10000,\r\n    \"weightLimit\": 12000,\r\n    \"fee\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/transport/66f947d103c743a76499efe6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transport",
+								"66f947d103c743a76499efe6"
 							]
 						}
 					},
@@ -429,6 +600,208 @@
 							"port": "8080",
 							"path": [
 								"logistic"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Logistic By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"originStreet\": \"update street\",\r\n    \"destinationStreet\": \"update destination\",\r\n    \"cost\": \"500\",\r\n    \"totalWeight\": 700,\r\n    \"date\": \"09/11/2022\",\r\n    \"type\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/logistic/6722400950a5bc2534a1137b",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"logistic",
+								"6722400950a5bc2534a1137b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Logistic By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/logistic/672240dd50a5bc2534a1137e",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"logistic",
+								"672240dd50a5bc2534a1137e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Logistic By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/logistic/6722400950a5bc2534a1137b",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"logistic",
+								"6722400950a5bc2534a1137b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Logistic By User Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/logistic/user/66faec49a8165ddd354880e0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"logistic",
+								"user",
+								"66faec49a8165ddd354880e0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rent",
+			"item": [
+				{
+					"name": "Create Rent",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idAsset\": \"66f328ee25cdf304f6f26405\",\r\n    \"idUser\": \"66f94577a424761c2fa05a40\",\r\n    \"startDate\": \"10/22/2024\",\r\n    \"finishDate\": \"10/23/2024\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/rent",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rent"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Rent",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"startDate\": \"10/19/2024\",\r\n    \"finishDate\": \"10/20/2024\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/rent/6722341aad7a8f197441a4c1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rent",
+								"6722341aad7a8f197441a4c1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Rent By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/rent/66de2216a184d0fe3f00892a",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rent",
+								"66de2216a184d0fe3f00892a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Rents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/rents",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Rent By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/rent/6722341aad7a8f197441a4c1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rent",
+								"6722341aad7a8f197441a4c1"
 							]
 						}
 					},
