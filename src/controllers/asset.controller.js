@@ -30,23 +30,39 @@ class AssetController {
     }
   }
 
-  //trae inmueble por ID
-  async getAssetById(req, res) {
-    try {
-      const AssetID = req.body._id;
-      const asset = await AssetService.getAssetById(AssetID);
-      return res.status(200).json({
-        message: "asset by Id bringed",
-        asset: asset,
-        status: 200,
-      });
-    } catch (err) {
-      console.error(err);
-      return res.status(500).json({
-        method: "getAssetById",
-        message: "Server error",
-      });
-    }
+    //trae inmueble por ID
+    async getAssetById(req, res) {
+      try {
+        const AssetID = req.params.id;
+
+          if (!AssetID) {
+              return res.status(400).json({
+                  message: "Asset ID is required.",
+                  status: 400,
+              });
+          }
+  
+          const asset = await AssetService.getAssetById(AssetID);
+  
+          if (!asset || asset.length === 0) {
+              return res.status(404).json({
+                  message: "Asset not found.",
+                  status: 404,
+              });
+          }
+  
+          return res.status(200).json({
+              message: "Asset found.",
+              asset: asset[0],
+              status: 200,
+          });
+      } catch (err) {
+          console.error(err);
+          return res.status(500).json({
+              method: "getAssetById",
+              message: "Server error",
+          });
+      }
   }
 
   async updateAssetById(req, res) {

@@ -4,7 +4,7 @@ const ObjectId = require('mongodb').ObjectId;
 
 class AssetService {
 
-    //trae todo los inmuebles
+    //trae todos los inmuebles
     async getAssets() {
         try {
             const assets = await AssetModel.find({});
@@ -16,26 +16,21 @@ class AssetService {
         }
     }
 
-
     //busca inmueble por id
-    async getAssetById(id) {
-        try {
+        async getAssetById(id) {
+          try {
 
-            if (id !== "") {
-                const assets = await AssetModel.find({ "_id": new mongoose.Types.ObjectId(id) });
-                console.log(assets)
-                return assets;
-
-            } else {
-                const assets = await AssetModel.find({ "_id": new mongoose.Types.ObjectId(id) });
-                return assets;
-            }
-
-        } catch (err) {
-            console.error(err);
-            throw new Error("Error in getAssetById Service");
-        }
-    }
+              if (!id) {
+                  throw new Error("ID must not be empty");
+              }
+              const assets = await AssetModel.find({ "_id": new mongoose.Types.ObjectId(id) });
+      
+              return assets; 
+          } catch (err) {
+              console.error(err);
+              throw new Error("Error in getAssetById Service");
+          }
+      }
 
     async updateAssetById(assetId, assetData) {
         try {

@@ -16,6 +16,6 @@ router.put("/asset/:id", assetController.updateAssetById);
 router.delete("/asset/:id" , assetController.deleteAsset);
 
 //obtener un asset por id
-router.post("/idAssets", assetController.getAssetById);
+router.get("/asset/:id", assetController.getAssetById);
 
 module.exports = router;

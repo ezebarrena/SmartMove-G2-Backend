@@ -72,6 +72,14 @@ class FurnitureController {
         try {
             const userId = req.params.userId;
             const furnitureList = await furnitureService.getFurnitureByUser(userId);
+            
+            if (furnitureList.length === 0) {
+                return res.status(404).json({
+                    message: "No furniture found for this user.",
+                    status: 404
+                });
+            }
+
             return res.status(200).json({
                 message: "Furniture found!",
                 Mobiliario: furnitureList,

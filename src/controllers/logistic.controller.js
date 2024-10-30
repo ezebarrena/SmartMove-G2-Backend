@@ -97,6 +97,14 @@ class LogisticController {
         try {
             const userId = req.params.userId;
             const logistics = await logisticService.getLogisticsByUserId(userId);
+
+            if (logistics.length === 0) {
+                return res.status(404).json({
+                    message: "No logistics found for this user.",
+                    status: 404
+                });
+            }
+
             return res.status(200).json({
                 message: "Logistics found!",
                 Logistics: logistics,

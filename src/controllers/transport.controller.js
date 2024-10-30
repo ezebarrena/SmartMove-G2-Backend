@@ -51,6 +51,55 @@ class TransportController {
             });
         }
     }
+
+    async deleteTransport(req, res) {
+        try {
+            const id = req.params.id;
+            const deletedTransport = await transportService.deleteTransport(id);
+            if (!deletedTransport) {
+                return res.status(404).json({
+                    message: "Transport not found",
+                    status: 404
+                });
+            }
+            return res.status(200).json({
+                message: "Transport deleted successfully!",
+                status: 200
+            });
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({
+                method: "deleteTransport",
+                status: 500,
+                error: err.message
+            });
+        }
+    }
+
+    async updateTransport(req, res) {
+        try {
+            const id = req.params.id;
+            const updatedTransport = await transportService.updateTransport(id, req.body);
+            if (!updatedTransport) {
+                return res.status(404).json({
+                    message: "Transport not found",
+                    status: 404
+                });
+            }
+            return res.status(200).json({
+                message: "Transport updated successfully!",
+                Transport: updatedTransport,
+                status: 200
+            });
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({
+                method: "updateTransport",
+                status: 500,
+                error: err.message
+            });
+        }
+    }
 }
 
 module.exports = TransportController.getInstance()
