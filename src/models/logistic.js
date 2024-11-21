@@ -8,7 +8,9 @@ const LogisticSchema = new Schema({
     destinationStreet: String,
     cost: String,
     totalWeight: Number,
-    date: Date,
+    creationDate: Date, //FECHA CREACION
+    logisticDate: Date, //FECHA DE LA MUDANZA
+    furnitureDate: Date, // FECHA RETIRO MOBILIARIO
     type: Number, //0: los muebles van de una casa a otra, 1: muebles pasan por un deposito
     furnitures: [{ type: mongoose.Schema.ObjectId, ref:'furniture'}],
     workersId: [{ type: mongoose.Schema.ObjectId, ref:'worker'}],
