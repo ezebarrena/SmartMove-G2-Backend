@@ -2,20 +2,34 @@ const express = require('express');
 const {dbConnection} = require('./src/db/config');
 const cors = require('cors');
 const app = express();
+const validateJWT = require('./src/middleware/jwt.middleware');
 
 require('dotenv').config();
 
 
 app.use(cors());
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+//leer cookies request jwt auth
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
 dbConnection();
 const PORT = 8080;
 
-app.get('/', (req, res) => {
-  res.send('Hello class!')
+// Endpoint libre sin validación JWT
+app.get('/test-free', (req, res) => {
+  res.json({ message: 'Endpoint sin JWT' });
+});
+
+// Middleware global: validar JWT
+app.use((req, res, next) => {
+  const publicRoutes = ['/login', '/register', '/test-free'];
+  if (publicRoutes.includes(req.path)) {
+    return next(); // Permitir acceso sin validación
+  }
+  validateJWT(req, res, next); // Validar JWT para el resto
 });
 
 app.use("/", require('./src/routes/furniture.routes'));
