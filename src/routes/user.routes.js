@@ -1,18 +1,19 @@
 const { Router} = require("express")
 const userController = require("../controllers/user.controller")
+const verifyToken = require('../controllers/verifyToken.controller');
 
-const router = Router()
+const router = Router();
 
-//crear usuario
+// Crear usuario (ruta pública)
 router.post("/user", userController.createUser);
 
-//actualizar usuario
-router.put("/user/:id", userController.updateUser);
+// Actualizar usuario (ruta protegida)
+router.put("/user/:id", verifyToken, userController.updateUser);
 
-//eliminar usuario
-router.delete("/user/:id", userController.deleteUser);
+// Eliminar usuario (ruta protegida)
+router.delete("/user/:id", verifyToken, userController.deleteUser);
 
-//obtener usuario por id
-router.get("/user/:id", userController.findUserById);
+// Obtener usuario por ID (ruta protegida)
+router.get("/user/:id", verifyToken, userController.findUserById);
 
-module.exports = router
+module.exports = router;
