@@ -1,5 +1,10 @@
 const { Router} = require("express")
 const userController = require("../controllers/user.controller")
+const express = require('express');
+const dotenv = require('dotenv');
+const jwt = require('jsonwebtoken');
+
+app.use(express.json());
 
 const router = Router()
 
