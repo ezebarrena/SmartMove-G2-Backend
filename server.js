@@ -25,7 +25,7 @@ app.get('/test-free', (req, res) => {
 
 // Middleware global: validar JWT
 app.use((req, res, next) => {
-  const publicRoutes = ['/login', '/register', '/test-free'];
+  const publicRoutes = ['/login', '/register'];
   if (publicRoutes.includes(req.path)) {
     return next(); // Permitir acceso sin validación
   }

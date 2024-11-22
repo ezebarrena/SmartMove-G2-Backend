@@ -13,7 +13,7 @@ router.put("/furniture/:id", furnitureController.updateFurniture);
 router.delete("/furniture/:id", furnitureController.deleteFurniture);
 
 //obtener todos los mobiliarios para un usuario en especifico
-router.get("/furniture/user/:userId", furnitureController.getFurnitureByUser);
+router.get("/furniture/user", furnitureController.getFurnitureByUser);
 
 //obtener un mobiliario especifico pasandole un id
 router.get("/furniture/:id", furnitureController.getFurnitureById);

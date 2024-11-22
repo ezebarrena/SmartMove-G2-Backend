@@ -7,12 +7,12 @@ const router = Router()
 router.post("/user", userController.createUser);
 
 //actualizar usuario
-router.put("/user/:id", userController.updateUser);
+router.put("/user", userController.updateUser);
 
 //eliminar usuario
-router.delete("/user/:id", userController.deleteUser);
+router.delete("/user", userController.deleteUser);
 
 //obtener usuario por id
-router.get("/user/:id", userController.findUserById);
+router.get("/user", userController.findUserById);
 
 module.exports = router

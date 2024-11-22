@@ -90,7 +90,7 @@ class VisitController {
 
     async getVisitsByUserId(req, res) {
        try {
-        const userId = req.params.userId;
+        const userId = req.user.cuit;
         const visits = await visitService.getVisitByUserId(userId);
         return res.status(200).json({
             message: "Visit found!",

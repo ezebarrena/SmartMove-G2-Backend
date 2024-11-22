@@ -22,7 +22,7 @@ class UserController {
 
     async updateUser(req, res) {
         try {
-            const user = await userService.updateUser(req.params.id, req.body);
+            const user = await userService.updateUser(req.user.cuit, req.body);
             if (user) {
                 res.status(200).json(user);
             } else {
@@ -35,7 +35,7 @@ class UserController {
 
     async deleteUser(req, res) {
         try {
-            const user = await userService.deleteUser(req.params.id);
+            const user = await userService.deleteUser(req.user.cuit);
             res.status(200).json(user);
         } catch (error) {
             res.status(500).json({ message: error.message });
@@ -44,7 +44,7 @@ class UserController {
 
     async findUserById(req, res) {
         try {
-            const user = await userService.findUserById(req.params.id);
+            const user = await userService.findUserById(req.user.cuit);
             res.status(200).json(user);
         } catch (error) {
             res.status(404).json({ message: error.message });
