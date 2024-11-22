@@ -11,7 +11,7 @@ const sqs = new AWS.SQS({
 const sqsUrl = process.env.SQS_URL; // URL de la cola SQS
 const backendIp = process.env.BACKEND_IP; // IP o URL del backend
 
-// Procesar un mensaje individual
+// Procesar un mensaje individual (Usuarios e Inmuebles)
 const processMessage = async (message) => {
   try {
     const data = JSON.parse(message.Body);
@@ -31,7 +31,7 @@ const processMessage = async (message) => {
       };
 
       // Enviar solicitud al backend para crear usuario
-      await axios.post(`http://${backendIp}:8080/user`, user);  // Ruta actualizada
+      await axios.post(`http://${backendIp}:8080/user`, user);  // Ruta de usuario creada
 
     } else if (detailType === "UsuarioModificado") {
       const tokenResponse = await axios.post(`http://${backendIp}:8080/user/login/`, {
@@ -53,7 +53,7 @@ const processMessage = async (message) => {
       };
 
       // Enviar solicitud para modificar usuario
-      await axios.put(`http://${backendIp}:8080/user/${detail.cuit}`, user, {  // Ruta actualizada
+      await axios.put(`http://${backendIp}:8080/user/${detail.cuit}`, user, {  // Ruta de usuario actualizada
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -66,9 +66,36 @@ const processMessage = async (message) => {
       const token = tokenResponse.data.access;
 
       // Enviar solicitud para eliminar usuario
-      await axios.delete(`http://${backendIp}:8080/user/${detail.cuit}`, {  // Ruta actualizada
+      await axios.delete(`http://${backendIp}:8080/user/${detail.cuit}`, {  // Ruta de usuario eliminada
         headers: { Authorization: `Bearer ${token}` },
       });
+
+    // Procesar eventos de inmuebles
+    } else if (detailType === "PublicacionCreada") {
+      const asset = {
+        title: detail.title,
+        description: detail.description,
+        price: detail.price,
+        location: detail.location,
+        area: detail.area,
+        owner: detail.owner, // Suponiendo que este dato es parte del detalle
+      };
+
+      // Enviar solicitud al backend para crear inmueble
+      await axios.post(`http://${backendIp}:8080/assets`, asset);  // Ruta para crear inmueble
+
+    } else if (detailType === "PublicacionActualizada") {
+      const asset = {
+        title: detail.title,
+        description: detail.description,
+        price: detail.price,
+        location: detail.location,
+        area: detail.area,
+        owner: detail.owner, // Suponiendo que este dato es parte del detalle
+      };
+
+      // Enviar solicitud para actualizar inmueble
+      await axios.put(`http://${backendIp}:8080/asset/${detail.id}`, asset);  // Ruta para actualizar inmueble
 
     } else {
       console.log(`Evento no reconocido: ${detailType}`);
