@@ -9,7 +9,7 @@ const sqs = new AWS.SQS({
 });
 
 const sqsUrl = process.env.SQS_URL; // URL de la cola SQS
-const backendIp = process.env.BACKEND_IP; // IP o URL del backend
+const backendIp = process.env.BACKEND_IP; // IP del backend
 
 // Procesar un mensaje individual (Usuarios e Inmuebles)
 const processMessage = async (message) => {
@@ -17,7 +17,7 @@ const processMessage = async (message) => {
     const data = JSON.parse(message.Body);
     const { "detail-type": detailType, detail } = data;
 
-    // Procesar diferentes tipos de eventos
+    // Procesar eventos de usuarios
     if (detailType === "UsuarioCreado") {
       const user = {
         cuit: detail.cuit,
@@ -36,8 +36,7 @@ const processMessage = async (message) => {
 
     } else if (detailType === "UsuarioModificado") {
       const user = {
-        id: detail.id,  // Usamos el id del usuario para actualizar
-        cuit: detail.cuit,
+        cuit: detail.cuit, // Usamos el cuit del usuario para actualizar
         username: detail.username,
         password: detail.password,
         name: detail.name,
@@ -47,14 +46,48 @@ const processMessage = async (message) => {
         is_staff: true,
       };
 
-      // Actualizar usuario
-      await axios.put(`http://${backendIp}:8080/user/${detail.id}`, user);  // Ahora usamos el id para la ruta
+      // Actualizar usuario utilizando el cuit
+      await axios.put(`http://${backendIp}:8080/user/${detail.cuit}`, user);  // Usamos el cuit para la ruta
       console.log("Usuario modificado:", user);
 
     } else if (detailType === "UsuarioEliminado") {
-      // Eliminar usuario usando el id
-      await axios.delete(`http://${backendIp}:8080/user/${detail.id}`);
-      console.log("Usuario eliminado:", detail.id);
+      // Eliminar usuario usando el cuit
+      await axios.delete(`http://${backendIp}:8080/user/${detail.cuit}`);
+      console.log("Usuario eliminado:", detail.cuit);
+
+    // Procesar eventos de inmobiliaria (inmuebles)
+    } else if (detailType === "PublicacionCreada") {
+      const asset = {
+        title: detail.title,
+        description: detail.description,
+        price: detail.price,
+        location: detail.location,
+        area: detail.area,
+        owner: detail.owner,
+      };
+
+      // Crear inmueble
+      await axios.post(`http://${backendIp}:8080/assets`, asset);
+      console.log("Inmueble creado:", asset);
+
+    } else if (detailType === "PublicacionActualizada") {
+      const asset = {
+        title: detail.title,
+        description: detail.description,
+        price: detail.price,
+        location: detail.location,
+        area: detail.area,
+        owner: detail.owner,
+      };
+
+      // Actualizar inmueble utilizando el ID
+      await axios.put(`http://${backendIp}:8080/asset/${detail.id}`, asset);  // Usamos el ID para la ruta
+      console.log("Inmueble modificado:", asset);
+
+    } else if (detailType === "PublicacionEliminada") {
+      // Eliminar inmueble utilizando el ID
+      await axios.delete(`http://${backendIp}:8080/asset/${detail.id}`);
+      console.log("Inmueble eliminado:", detail.id);
 
     } else {
       console.log(`Evento no reconocido: ${detailType}`);
