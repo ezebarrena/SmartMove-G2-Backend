@@ -30,8 +30,7 @@ const processMessage = async (message) => {
         is_staff: true,
       };
 
-      // Enviar solicitud al backend para crear usuario
-      await axios.post(`http://${backendIp}:8080/user`, user);  // Ruta de usuario creada
+      await axios.post(`http://${backendIp}:8080/user`, user);
 
     } else if (detailType === "UsuarioModificado") {
       const tokenResponse = await axios.post(`http://${backendIp}:8080/user/login/`, {
@@ -52,8 +51,7 @@ const processMessage = async (message) => {
         is_staff: true,
       };
 
-      // Enviar solicitud para modificar usuario
-      await axios.put(`http://${backendIp}:8080/user/${detail.cuit}`, user, {  // Ruta de usuario actualizada
+      await axios.put(`http://${backendIp}:8080/user/${detail.cuit}`, user, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -65,12 +63,10 @@ const processMessage = async (message) => {
 
       const token = tokenResponse.data.access;
 
-      // Enviar solicitud para eliminar usuario
-      await axios.delete(`http://${backendIp}:8080/user/${detail.cuit}`, {  // Ruta de usuario eliminada
+      await axios.delete(`http://${backendIp}:8080/user/${detail.cuit}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-    // Procesar eventos de inmuebles
     } else if (detailType === "PublicacionCreada") {
       const asset = {
         title: detail.title,
@@ -78,11 +74,10 @@ const processMessage = async (message) => {
         price: detail.price,
         location: detail.location,
         area: detail.area,
-        owner: detail.owner, // Suponiendo que este dato es parte del detalle
+        owner: detail.owner,
       };
 
-      // Enviar solicitud al backend para crear inmueble
-      await axios.post(`http://${backendIp}:8080/assets`, asset);  // Ruta para crear inmueble
+      await axios.post(`http://${backendIp}:8080/assets`, asset);
 
     } else if (detailType === "PublicacionActualizada") {
       const asset = {
@@ -91,11 +86,10 @@ const processMessage = async (message) => {
         price: detail.price,
         location: detail.location,
         area: detail.area,
-        owner: detail.owner, // Suponiendo que este dato es parte del detalle
+        owner: detail.owner,
       };
 
-      // Enviar solicitud para actualizar inmueble
-      await axios.put(`http://${backendIp}:8080/asset/${detail.id}`, asset);  // Ruta para actualizar inmueble
+      await axios.put(`http://${backendIp}:8080/asset/${detail.id}`, asset);
 
     } else {
       console.log(`Evento no reconocido: ${detailType}`);
@@ -107,43 +101,25 @@ const processMessage = async (message) => {
   }
 };
 
-// Leer y procesar mensajes de SQS
-const pollMessages = async () => {
+// Handler para AWS Lambda
+const handler = async (event, context) => {
   try {
-    const response = await sqs
-      .receiveMessage({
-        QueueUrl: sqsUrl,
-        MaxNumberOfMessages: 10,
-        VisibilityTimeout: 60,
-        WaitTimeSeconds: 1,
-      })
-      .promise();
-
-    if (response.Messages) {
-      for (const message of response.Messages) {
-        await processMessage(message);
-
-        // Eliminar mensaje de la cola una vez procesado
-        await sqs
-          .deleteMessage({
-            QueueUrl: sqsUrl,
-            ReceiptHandle: message.ReceiptHandle,
-          })
-          .promise();
-
-        console.log("Mensaje eliminado de la cola.");
-      }
-    } else {
-      console.log("No hay mensajes en la cola.");
+    // SQS Batch: Procesar cada mensaje del evento
+    for (const record of event.Records) {
+      await processMessage(record);
     }
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: "Mensajes procesados correctamente" }),
+    };
   } catch (error) {
-    console.error("Error al leer mensajes de SQS:", error);
+    console.error("Error en el handler:", error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "Error procesando mensajes" }),
+    };
   }
 };
 
-// Ejecutar continuamente para escuchar la cola
-const startListener = () => {
-  setInterval(pollMessages, 5000); // Verificar mensajes cada 5 segundos
-};
-
-module.exports = { startListener };
+module.exports = { handler };
