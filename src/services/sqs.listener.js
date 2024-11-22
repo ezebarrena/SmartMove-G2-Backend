@@ -30,17 +30,13 @@ const processMessage = async (message) => {
         is_staff: true,
       };
 
+      // Crear usuario
       await axios.post(`http://${backendIp}:8080/user`, user);
+      console.log("Usuario creado:", user);
 
     } else if (detailType === "UsuarioModificado") {
-      const tokenResponse = await axios.post(`http://${backendIp}:8080/user/login/`, {
-        cuit_or_email: detail.cuit,
-        password: detail.password,
-      });
-
-      const token = tokenResponse.data.access;
-
       const user = {
+        id: detail.id,  // Usamos el id del usuario para actualizar
         cuit: detail.cuit,
         username: detail.username,
         password: detail.password,
@@ -51,45 +47,14 @@ const processMessage = async (message) => {
         is_staff: true,
       };
 
-      await axios.put(`http://${backendIp}:8080/user/${detail.cuit}`, user, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      // Actualizar usuario
+      await axios.put(`http://${backendIp}:8080/user/${detail.id}`, user);  // Ahora usamos el id para la ruta
+      console.log("Usuario modificado:", user);
 
     } else if (detailType === "UsuarioEliminado") {
-      const tokenResponse = await axios.post(`http://${backendIp}:8080/user/login/`, {
-        cuit_or_email: detail.cuit,
-        password: detail.password,
-      });
-
-      const token = tokenResponse.data.access;
-
-      await axios.delete(`http://${backendIp}:8080/user/${detail.cuit}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-    } else if (detailType === "PublicacionCreada") {
-      const asset = {
-        title: detail.title,
-        description: detail.description,
-        price: detail.price,
-        location: detail.location,
-        area: detail.area,
-        owner: detail.owner,
-      };
-
-      await axios.post(`http://${backendIp}:8080/assets`, asset);
-
-    } else if (detailType === "PublicacionActualizada") {
-      const asset = {
-        title: detail.title,
-        description: detail.description,
-        price: detail.price,
-        location: detail.location,
-        area: detail.area,
-        owner: detail.owner,
-      };
-
-      await axios.put(`http://${backendIp}:8080/asset/${detail.id}`, asset);
+      // Eliminar usuario usando el id
+      await axios.delete(`http://${backendIp}:8080/user/${detail.id}`);
+      console.log("Usuario eliminado:", detail.id);
 
     } else {
       console.log(`Evento no reconocido: ${detailType}`);
