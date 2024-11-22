@@ -9,13 +9,12 @@ const sqs = new AWS.SQS({
 });
 
 const sqsUrl = process.env.SQS_URL; // URL de la cola SQS
-const backendIp = process.env.s; // IP del backend
+const backendIp = process.env.BACKEND_IP; // IP o URL del backend
 
 // Procesar un mensaje individual
 const processMessage = async (message) => {
   try {
     const data = JSON.parse(message.Body);
-
     const { "detail-type": detailType, detail } = data;
 
     // Procesar diferentes tipos de eventos
@@ -32,10 +31,10 @@ const processMessage = async (message) => {
       };
 
       // Enviar solicitud al backend para crear usuario
-      await axios.post(`http://${backendIp}:8080/api/register/`, user);
+      await axios.post(`http://${backendIp}:8080/user`, user);  // Ruta actualizada
 
     } else if (detailType === "UsuarioModificado") {
-      const tokenResponse = await axios.post(`http://${backendIp}:8080/api/login/`, {
+      const tokenResponse = await axios.post(`http://${backendIp}:8080/user/login/`, {
         cuit_or_email: detail.cuit,
         password: detail.password,
       });
@@ -54,12 +53,12 @@ const processMessage = async (message) => {
       };
 
       // Enviar solicitud para modificar usuario
-      await axios.patch(`http://${backendIp}:8080/api/users/${detail.cuit}/`, user, {
+      await axios.put(`http://${backendIp}:8080/user/${detail.cuit}`, user, {  // Ruta actualizada
         headers: { Authorization: `Bearer ${token}` },
       });
 
     } else if (detailType === "UsuarioEliminado") {
-      const tokenResponse = await axios.post(`http://${backendIp}:8080/api/login/`, {
+      const tokenResponse = await axios.post(`http://${backendIp}:8080/user/login/`, {
         cuit_or_email: detail.cuit,
         password: detail.password,
       });
@@ -67,7 +66,7 @@ const processMessage = async (message) => {
       const token = tokenResponse.data.access;
 
       // Enviar solicitud para eliminar usuario
-      await axios.delete(`http://${backendIp}:8080/api/users/${detail.cuit}/`, {
+      await axios.delete(`http://${backendIp}:8080/user/${detail.cuit}`, {  // Ruta actualizada
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -80,7 +79,6 @@ const processMessage = async (message) => {
     console.error("Error al procesar el mensaje:", error);
   }
 };
-
 
 // Leer y procesar mensajes de SQS
 const pollMessages = async () => {
