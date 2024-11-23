@@ -12,7 +12,8 @@ const UserSchema = new Schema({
     email: String,         
     is_superuser: Boolean,
     is_staff: Boolean,     
-    favorites: [{ type: mongoose.Schema.ObjectId, ref: 'Asset' }] 
+    favorites: [{ type: mongoose.Schema.ObjectId, ref: 'Asset' }],
+    is_admin: Boolean,
 });
 
 const User = mongoose.model('User',UserSchema);
