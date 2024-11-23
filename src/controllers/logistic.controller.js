@@ -1,7 +1,7 @@
 const Logistic = require("../models/logistic")
 const logisticService = require("../services/logistic.service")
-const { publicarMudanzaSolicitada } = require("../services/eventService")
-const { publicarContratoMudanzaCompletada } = require("../services/eventService")
+const { publicarMudanzaSolicitada } = require("../services/event.service")
+const { publicarContratoMudanzaCompletada } = require("../services/event.service")
 
 
 let instance = null
