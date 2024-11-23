@@ -1,6 +1,7 @@
 let instance = null;
 require('dotenv').config()
 const visitService = require("../services/visit.service")
+const userService = require("../services/user.service");
 
 class VisitController {
 
@@ -11,13 +12,35 @@ class VisitController {
         return instance
     }
 
+    async getVisits(req, res) {
+        try {
+            const visits = await visitService.getAllVisits();
+            return res.status(200).json({
+                message: "Visits retrieved!",
+                visits: visits,
+                status: 200
+            });
+        }catch (error) {
+            console.error('Error al trear las visitas:', error);
+            return {
+                success: false,
+                message: 'Error al recuperar las visitas',
+                error: error.message
+            };
+        }
+    };
+
     async createVisit(req, res) {
         try {
+            const userId = req.user.cuit;            
+            const user = await userService.findUserById(userId); 
             const visitData = req.body;
             visitData.state = "Pendiente"
-            visitData.userId = req.user.cuit;
+            visitData.userId = user._id;
             visitData.isAudit = req.user.is_admin;
             //al crear la visita, siempre se crea en estado Pendiente
+            console.log(visitData);
+            
             let newVisit = await visitService.createVisit(visitData)
             return res.status(201).json({
                 message: "Visit Created!",
@@ -93,8 +116,10 @@ class VisitController {
 
     async getVisitsByUserId(req, res) {
        try {
+        const assetId = req.params.assetId;
         const userId = req.user.cuit;
-        const visits = await visitService.getVisitByUserId(userId);
+        const user = await userService.findUserById(userId);                
+        const visits = await visitService.getVisitByUserId(user._id, assetId);
         return res.status(200).json({
             message: "Visit found!",
             data: visits,

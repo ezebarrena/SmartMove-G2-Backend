@@ -3,6 +3,9 @@ const visitController = require("../controllers/visit.controller")
 
 const router = Router()
 
+//traer todas las visitas
+router.get("/visit/", visitController.getVisits);
+
 //crear visita
 router.post("/visit/", visitController.createVisit);
 
@@ -13,7 +16,7 @@ router.put('/visit/:id', visitController.updateVisit);
 router.delete('/visit/:id', visitController.deleteVisit);
 
 //obtener visitas para un usuario por id
-router.get('/visit/user', visitController.getVisitsByUserId);
+router.get('/visit/asset/:assetId/user', visitController.getVisitsByUserId);
 
 //obtener visitas para un asset por id
 router.get('/visit/asset/:assetId', visitController.getVisitByAssetId)

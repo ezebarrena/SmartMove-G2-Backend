@@ -35,7 +35,7 @@ class UserService {
 
     async findUserById(id) {
         try {
-            const user = await UserModel.find({'cuit': id});
+            const user = await UserModel.findOne({'cuit': id});
             if (!user) {
                 throw new Error('Usuario no encontrado');
             }
