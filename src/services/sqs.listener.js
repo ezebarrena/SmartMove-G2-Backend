@@ -1,21 +1,25 @@
-const AWS = require("aws-sdk");
-const axios = require("axios");
+const axios = require('axios');
+const AWS = require('aws-sdk');
 
-// Configuración de AWS SQS
 const sqs = new AWS.SQS({
+  region: 'us-east-1',
   accessKeyId: process.env.EDA_AK,
-  secretAccessKey: process.env.EDA_SK,
-  region: "us-east-1",
+  secretAccessKey: process.env.EDA_SK
 });
 
-const sqsUrl = process.env.SQS_URL; // URL de la cola SQS
-const backendIp = process.env.BACKEND_IP; // IP del backend
+const backendIp = process.env.BACK_IP;
+const sqsUrl = process.env.SQS_URL;
 
-// Procesar un mensaje individual (Usuarios e Inmuebles)
-const processMessage = async (message) => {
+const processMessage = async (record) => {
   try {
-    const data = JSON.parse(message.Body);
-    const { "detail-type": detailType, detail } = data;
+    const message = JSON.parse(record.body);
+    const detailType = message['detail-type'];
+    const detail = JSON.parse(message.detail);
+    
+    // Headers básicos
+    const headers = {
+      'Content-Type': 'application/json'
+    };
 
     // Procesar eventos de usuarios
     if (detailType === "UsuarioCreado") {
@@ -31,12 +35,12 @@ const processMessage = async (message) => {
       };
 
       // Crear usuario
-      await axios.post(`http://${backendIp}:8080/user`, user);
+      await axios.post(`http://${backendIp}:8080/user`, user, { headers });
       console.log("Usuario creado:", user);
 
     } else if (detailType === "UsuarioModificado") {
       const user = {
-        cuit: detail.cuit, // Usamos el cuit del usuario para actualizar
+        cuit: detail.cuit,
         username: detail.username,
         password: detail.password,
         name: detail.name,
@@ -47,15 +51,14 @@ const processMessage = async (message) => {
       };
 
       // Actualizar usuario utilizando el cuit
-      await axios.put(`http://${backendIp}:8080/user/${detail.cuit}`, user);
+      await axios.put(`http://${backendIp}:8080/user/${detail.cuit}`, user, { headers });
       console.log("Usuario modificado:", user);
 
     } else if (detailType === "UsuarioEliminado") {
-      // Eliminar usuario usando el cuit
-      await axios.delete(`http://${backendIp}:8080/user/${detail.cuit}`);
+      // Eliminar usuario utilizando el cuit
+      await axios.delete(`http://${backendIp}:8080/user/${detail.cuit}`, { headers });
       console.log("Usuario eliminado:", detail.cuit);
 
-    // Procesar eventos de inmuebles
     } else if (detailType === "PublicacionCreada") {
       const asset = {
         id: detail.id,
@@ -80,7 +83,7 @@ const processMessage = async (message) => {
       };
 
       // Crear inmueble
-      await axios.post(`http://${backendIp}:8080/assets`, asset);
+      await axios.post(`http://${backendIp}:8080/assets`, asset, { headers });
       console.log("Inmueble creado:", asset);
 
     } else if (detailType === "PublicacionActualizada") {
@@ -107,28 +110,26 @@ const processMessage = async (message) => {
       };
 
       // Actualizar inmueble utilizando el ID
-      await axios.put(`http://${backendIp}:8080/asset/${detail.id}`, asset);
+      await axios.put(`http://${backendIp}:8080/asset/${detail.id}`, asset, { headers });
       console.log("Inmueble modificado:", asset);
 
     } else if (detailType === "PublicacionEliminada") {
       // Eliminar inmueble utilizando el ID
-      await axios.delete(`http://${backendIp}:8080/asset/${detail.id}`);
+      await axios.delete(`http://${backendIp}:8080/asset/${detail.id}`, { headers });
       console.log("Inmueble eliminado:", detail.id);
 
     } else {
       console.log(`Evento no reconocido: ${detailType}`);
     }
 
-    console.log(`Procesado correctamente: ${detailType}`);
   } catch (error) {
     console.error("Error al procesar el mensaje:", error);
   }
 };
 
-// Handler para AWS Lambda
 const handler = async (event, context) => {
   try {
-    // SQS Batch: Procesar cada mensaje del evento
+    // Procesar cada mensaje del evento
     for (const record of event.Records) {
       await processMessage(record);
     }
