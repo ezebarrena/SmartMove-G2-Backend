@@ -8,6 +8,7 @@ const sqs = new AWS.SQS({
 });
 
 const processMessage = async (message) => {
+  console.log(message)
   try {
     const detail = JSON.parse(message.Body);
     const detailType = detail['detail-type'];  // Ejemplo: "UsuarioCreado"
