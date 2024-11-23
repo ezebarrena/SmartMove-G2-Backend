@@ -1,5 +1,8 @@
 const Logistic = require("../models/logistic")
 const logisticService = require("../services/logistic.service")
+const { publicarMudanzaSolicitada } = require("../services/eventService")
+const { publicarContratoMudanzaCompletada } = require("../services/eventService")
+
 
 let instance = null
 
@@ -12,19 +15,89 @@ class LogisticController {
         
     }
 
-    async createLogistic(req, res){
+    async createLogistic(req, res) {
         try {
-            const newLogistic = await logisticService.createLogistic(req.body)
+            // Obtener los datos de la solicitud de mudanza desde el body de la petición
+            const {
+                idMudanza,
+                fechaSolicitud,
+                fechaRealizacion,
+                barrioOrigen,
+                barrioDestino,
+                latOrigen,
+                lonOrigen,
+                latDestino,
+                lonDestino,
+                idUsuarioSolicita,
+                idUsuarioMudanza
+            } = req.body;
+    
+            const costo = 2500; // Valor hardcodeado
+    
+            // Mapear los datos del evento a los campos del modelo de logística
+            const logisticData = {
+                originStreet: barrioOrigen, // Mapeamos barrioOrigen a originStreet
+                destinationStreet: barrioDestino, // Mapeamos barrioDestino a destinationStreet
+                cost: costo, // Usamos el valor fijo para costo
+                creationDate: fechaSolicitud, // Mapeamos fecha de solicitud a creationDate
+                logisticDate: fechaRealizacion, // Mapeamos fecha de realización a logisticDate
+                type: 0, // Asumiendo que siempre será de casa a casa, si no, puedes ajustar esto
+                userId: idUsuarioSolicita, // Mapeamos el ID del usuario que solicita
+                // Si tienes datos adicionales como muebles o trabajadores, agrégales valores predeterminados
+                furnitures: [], // Aquí deberías mapear los muebles si están disponibles
+                workersId: [], // Aquí deberías mapear los trabajadores si están disponibles
+            };
+    
+            // Crear la logística (solicitud de mudanza)
+            const newLogistic = await Logistic.create(logisticData);
+    
+            // Llamar al servicio para crear la solicitud de mudanza
+            await logisticService.createLogistic(newLogistic);
+    
+            // Enviar el evento MudanzaSolicitada
+            await publicarMudanzaSolicitada(
+                idMudanza,
+                fechaSolicitud,
+                fechaRealizacion,
+                costo,
+                barrioOrigen,
+                barrioDestino,
+                latOrigen,
+                lonOrigen,
+                latDestino,
+                lonDestino,
+                idUsuarioSolicita,
+                idUsuarioMudanza
+            );
+    
+            // Llamar al evento ContratoMudanzaCompletada
+            await publicarContratoMudanzaCompletada(
+                idMudanza,
+                fechaSolicitud,
+                fechaRealizacion,
+                costo, 
+                barrioOrigen,
+                barrioDestino,
+                latOrigen,
+                lonOrigen,
+                latDestino,
+                lonDestino,
+                idUsuarioSolicita,
+                idUsuarioMudanza
+            );
+    
             return res.status(201).json({
-                message: "Created!",
+                message: "Created, Events Sent!",
                 Logistic: newLogistic,
                 status: 201
             });
-        } catch(err) {
+    
+        } catch (err) {
             console.error(err);
             return res.status(500).json({
                 method: "createLogistic",
-                status: 500
+                status: 500,
+                error: err.message
             });
         }
     }
