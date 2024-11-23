@@ -8,7 +8,7 @@ class VisitService {
     
     async createVisit (visit) {
         try {
-            let user = await UserModel.findOne({"_id": new mongoose.Types.ObjectId(visit.userId)})
+            let user = await UserModel.findOne({"cuit": visit.userId})
             let asset = await AssetModel.findOne({"_id": new mongoose.Types.ObjectId(visit.assetId)})
 
             const newVisit = await VisitModel.create(visit)
@@ -85,7 +85,7 @@ class VisitService {
 
     async getVisitByUserId(userId) {
         try {
-            const visits = await VisitModel.find({ userId: new mongoose.Types.ObjectId(userId) });
+            const visits = await VisitModel.find({ userId: userId });
             return visits;
         } catch (err) {
             console.error(err);
