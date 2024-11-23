@@ -14,7 +14,10 @@ class VisitController {
     async createVisit(req, res) {
         try {
             const visitData = req.body;
-            visitData.state = "Pendiente" //al crear la visita, siempre se crea en estado Pendiente
+            visitData.state = "Pendiente"
+            visitData.userId = req.user.cuit;
+            visitData.isAudit = req.user.is_admin;
+            //al crear la visita, siempre se crea en estado Pendiente
             let newVisit = await visitService.createVisit(visitData)
             return res.status(201).json({
                 message: "Visit Created!",

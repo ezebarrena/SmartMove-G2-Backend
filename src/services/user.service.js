@@ -23,7 +23,7 @@ class UserService {
 
     async deleteUser(userId) {
         try {
-            const user = await UserModel.findByIdAndDelete(userId);
+            const user = await UserModel.deleteOne({'cuit': userId});
             if (!user) {
                 throw new Error('Usuario no encontrado');
             }
@@ -35,7 +35,7 @@ class UserService {
 
     async findUserById(id) {
         try {
-            const user = await UserModel.findById(id);
+            const user = await UserModel.find({'cuit': id});
             if (!user) {
                 throw new Error('Usuario no encontrado');
             }
