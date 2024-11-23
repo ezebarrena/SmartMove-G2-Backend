@@ -5,15 +5,26 @@ const AssetModel = require("../models/asset");
 const mongoose = require('mongoose');
 
 class VisitService {
+
+    async getAllVisits() {
+        try {
+            const visits = await VisitModel.find();
+
+            return visits;
+        } catch(err) {
+            console.error(err);
+            throw new Error ("Error getting all visits")
+        }
+    }
     
     async createVisit (visit) {
         try {
-            let user = await UserModel.findOne({"cuit": visit.userId})
-            let asset = await AssetModel.findOne({"_id": new mongoose.Types.ObjectId(visit.assetId)})
+            // let user = await UserModel.findOne({"_id": new mongoose.Types.ObjectId(visit.userId)})
+            // let asset = await AssetModel.findOne({"_id": new mongoose.Types.ObjectId(visit.assetId)})
 
             const newVisit = await VisitModel.create(visit)
 
-            await sendVisitInvitationEmail(user.email, newVisit.visitDate, asset)
+            // await sendVisitInvitationEmail(user.email, newVisit.visitDate, asset)
 
             return newVisit
         }
@@ -36,6 +47,13 @@ class VisitService {
 
             if (!updatedVisit) {
                 return null;
+            }
+
+            const user = await UserModel.findById(updatedVisit.userId);
+            let asset = await AssetModel.findById(updatedVisit.assetId)
+
+            if(updatedVisit.state == 'Confirmada') {
+                await sendVisitInvitationEmail(user.email, updatedVisit.visitDate, asset)
             }
     
             return updatedVisit;
@@ -83,9 +101,9 @@ class VisitService {
         }
     }
 
-    async getVisitByUserId(userId) {
+    async getVisitByUserId(userId, assetId) {
         try {
-            const visits = await VisitModel.find({ userId: userId });
+            const visits = await VisitModel.find({ userId: userId, assetId: assetId });
             return visits;
         } catch (err) {
             console.error(err);

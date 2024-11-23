@@ -24,9 +24,8 @@ const transporter = nodemailer.createTransport({
   const sendVisitInvitationEmail = async (contactEmail, visitDate, assetData) => {
 
     //DATOS DEL INMUEBLE
-    const street = assetData.streetName
-    const streetNumber = assetData.streetNumber
-    const location = assetData.location
+    const address = assetData.address
+    const location = assetData.district
 
     //DATOS DE LA VISITA
     const year = visitDate.getFullYear();
@@ -40,8 +39,8 @@ const transporter = nodemailer.createTransport({
       title: 'Visita Guiada',
       method:'REQUEST',
 
-      description: `Visita al inmbuebe ubicado en ${street} ${streetNumber}`,
-      location: `${street} ${streetNumber}, ${location}`,
+      description: `Visita al inmbuebe ubicado en ${address}`,
+      location: `${address}, ${location}`,
       
       
       
@@ -65,7 +64,7 @@ const transporter = nodemailer.createTransport({
         from: process.env.USER,
         to: contactEmail, 
         subject: `Invitacion a la visita `,
-        text: `Se le envia la invitacion para la visita a ${street} ${streetNumber}`,
+        text: `Se le envia la invitacion para la visita a ${ address }`,
         attachments: {
           filename:'event.ics',
           path: `${__dirname}/event.ics`
