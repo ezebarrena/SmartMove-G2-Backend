@@ -43,7 +43,6 @@ class UserController {
     }
 
     async findUserById(req, res) {
-        console.log(req.user);
         try {
             const user = await userService.findUserById(req.user.cuit);
             res.status(200).json(user);
