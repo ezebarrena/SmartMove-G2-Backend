@@ -47,7 +47,7 @@ const processMessage = async (message) => {
       };
 
       // Actualizar usuario utilizando el cuit
-      await axios.put(`http://${backendIp}:8080/user/${detail.cuit}`, user);  // Usamos el cuit para la ruta
+      await axios.put(`http://${backendIp}:8080/user/${detail.cuit}`, user);
       console.log("Usuario modificado:", user);
 
     } else if (detailType === "UsuarioEliminado") {
@@ -55,15 +55,28 @@ const processMessage = async (message) => {
       await axios.delete(`http://${backendIp}:8080/user/${detail.cuit}`);
       console.log("Usuario eliminado:", detail.cuit);
 
-    // Procesar eventos de inmobiliaria (inmuebles)
+    // Procesar eventos de inmuebles
     } else if (detailType === "PublicacionCreada") {
       const asset = {
+        id: detail.id,
+        beds: detail.beds,
+        bathrooms: detail.bathrooms,
+        district: detail.district,
+        rooms: detail.rooms,
         title: detail.title,
         description: detail.description,
+        latitude: detail.latitude,
+        longitude: detail.longitude,
+        address: detail.address,
+        zipcode: detail.zipcode,
         price: detail.price,
-        location: detail.location,
-        area: detail.area,
-        owner: detail.owner,
+        type: detail.type,
+        active: detail.active,
+        favorite: detail.favorite,
+        disable: detail.disable,
+        surface_covered: detail.surface_covered,
+        surface_total: detail.surface_total,
+        owner_id: detail.owner_id,
       };
 
       // Crear inmueble
@@ -72,16 +85,29 @@ const processMessage = async (message) => {
 
     } else if (detailType === "PublicacionActualizada") {
       const asset = {
+        id: detail.id,
+        beds: detail.beds,
+        bathrooms: detail.bathrooms,
+        district: detail.district,
+        rooms: detail.rooms,
         title: detail.title,
         description: detail.description,
+        latitude: detail.latitude,
+        longitude: detail.longitude,
+        address: detail.address,
+        zipcode: detail.zipcode,
         price: detail.price,
-        location: detail.location,
-        area: detail.area,
-        owner: detail.owner,
+        type: detail.type,
+        active: detail.active,
+        favorite: detail.favorite,
+        disable: detail.disable,
+        surface_covered: detail.surface_covered,
+        surface_total: detail.surface_total,
+        owner_id: detail.owner_id,
       };
 
       // Actualizar inmueble utilizando el ID
-      await axios.put(`http://${backendIp}:8080/asset/${detail.id}`, asset);  // Usamos el ID para la ruta
+      await axios.put(`http://${backendIp}:8080/asset/${detail.id}`, asset);
       console.log("Inmueble modificado:", asset);
 
     } else if (detailType === "PublicacionEliminada") {
