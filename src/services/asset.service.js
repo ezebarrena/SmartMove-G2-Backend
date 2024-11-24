@@ -23,7 +23,7 @@ class AssetService {
               if (!id) {
                   throw new Error("ID must not be empty");
               }
-              const assets = await AssetModel.find({ "_id": new mongoose.Types.ObjectId(id) });
+              const assets = await AssetModel.findById(id);
       
               return assets; 
           } catch (err) {

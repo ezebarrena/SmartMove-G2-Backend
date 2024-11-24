@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const AssetSchema = new Schema({
-    id: Number,          
+    _id: Number,          
     beds: Number,        
     bathrooms: Number,   
     district: String,    
@@ -21,7 +21,7 @@ const AssetSchema = new Schema({
     disable: Boolean,    
     surface_covered: Number, 
     surface_total: Number,  
-    owner_id: { type: mongoose.Schema.ObjectId, ref:'user'},   
+    owner_id: Number,   
     created_at: { type: Date, default: Date.now }, 
     favorites: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
     dayAvailability: [Number],                              // 1: Lunes, 2: Martes, 3: Miercoles, 4: Jueves, 5:Viernes

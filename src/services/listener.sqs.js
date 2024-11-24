@@ -1,6 +1,8 @@
 const { SQSClient, ReceiveMessageCommand, DeleteMessageCommand } = require("@aws-sdk/client-sqs");
 const { credentials } = require("./credentials");
 const winston = require("winston");
+const userService = require('../services/user.service');
+const assetService = require('../services/asset.service');
 
 const client = new SQSClient({
   region: "us-east-1", // Cambia por tu región
@@ -20,6 +22,62 @@ const logger = winston.createLogger({
 });
 // Definir el Queue URL como constante global
 const QUEUE_URL = "https://sqs.us-east-1.amazonaws.com/205930646901/logistica"; // Reemplázalo con tu Queue URL real
+
+
+async function processMessage(message) {
+  try {
+    const parsedMessage = JSON.parse(message.Body);
+    console.log(parsedMessage);
+    const detailType = parsedMessage['detail-type'];
+    const { detail } = parsedMessage;
+
+    console.log(detailType);
+    
+
+    if(detailType === 'UsuarioCreado' || detailType === 'UsuarioModificado') {
+      console.log('Procesando mensaje de usuario');
+      const user = {
+        cuit: detail.userId,
+        username: detail.username,
+        email: detail.email,
+        is_superuser: false, // Ajustar según tus datos
+        is_staff: false,
+        is_admin: detail.rol_logistica === 'auditor', // Ejemplo
+      };
+      if(detailType === 'UsuarioCreado') {
+        await userService.createUser(user);
+      } else if(detailType === 'UsuarioModificado') {
+        await userService.updateUser(user.cuit, user);
+      }
+    } else if(detailType === 'InmueblCreado') {
+      console.log('Procesando mensaje de inmueble');
+      const asset = {
+        _id: detail.id,
+        beds: detail.beds,
+        bathrooms: detail.bathrooms,
+        district: detail.district,
+        rooms: detail.rooms,
+        title: detail.title,
+        description: detail.description,
+        latitude: detail.latitude,
+        longitude: detail.longitude,
+        owner_id: detail.user_id,
+        address: detail.address,
+        address: detail.zipcode,
+        dayAvailability: [1,2,3,4,5],
+        hoursAvailability: {
+          startHour: 9,
+          endHour: 18
+        }
+      };
+      const newAsset = await assetService.postAsset(asset);
+      console.log(newAsset);
+      
+    }
+  } catch(err) {
+    console.log(error);
+  }
+}
 
 // Recibir mensajes de la cola
 async function receiveMessages() {
@@ -75,6 +133,7 @@ async function pollMessages() {
             try {
               logger.info(`Procesando mensaje: ${message.Body}`);
               // Aquí puedes incluir tu lógica de negocio para procesar el mensaje
+              await processMessage(message);
               await deleteMessage(message.ReceiptHandle); // Eliminar mensaje procesado
             } catch (error) {
               logger.error("Error procesando mensaje:", error);
