@@ -93,7 +93,7 @@ class VisitService {
 
     async getVisitByAssetId(assetId) {
         try {
-            const visits = await VisitModel.find({ assetId: new mongoose.Types.ObjectId(assetId) });
+            const visits = await VisitModel.find({ assetId: assetId });
             return visits;
         } catch (err) {
             console.error(err);
