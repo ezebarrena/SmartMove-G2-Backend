@@ -81,5 +81,6 @@ const publicarContratoMudanzaCompletada = async (idMudanza, fechaSolicitud, fech
 };
 
 module.exports = {
-  publicarMudanzaSolicitada
+  publicarMudanzaSolicitada,
+  publicarContratoMudanzaCompletada
 };

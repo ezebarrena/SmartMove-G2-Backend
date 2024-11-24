@@ -1,3 +1,4 @@
+const { ServerMonitoringMode } = require('mongodb');
 const mongoose = require('mongoose');
 
 
@@ -6,6 +7,8 @@ const { Schema } = mongoose;
 const LogisticSchema = new Schema({
     originStreet:String,
     destinationStreet: String,
+    originDistrict: String,
+    destinationDistrict: String,
     cost: String,
     totalWeight: Number,
     creationDate: Date, //FECHA CREACION
