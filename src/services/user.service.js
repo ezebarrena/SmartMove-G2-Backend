@@ -14,7 +14,7 @@ class UserService {
 
     async updateUser(id, data) {
         try {
-            const updatedUser = await User.findByIdAndUpdate(id, data, { new: true });
+            const updatedUser = await UserModel.findByIdAndUpdate(id, data, { new: true });
             return updatedUser;           
         } catch (error) {
             throw new Error(`Error updating user: ${error.message}`);

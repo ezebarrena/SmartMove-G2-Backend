@@ -3,6 +3,7 @@ const {dbConnection} = require('./src/db/config');
 const cors = require('cors');
 const app = express();
 const validateJWT = require('./src/middleware/jwt.middleware');
+const { pollMessages } = require('./src/services/listener.sqs'); 
 
 require('dotenv').config();
 
@@ -44,6 +45,12 @@ app.use("/", require('./src/routes/worker.routes'))
 
 app.listen(PORT, () => {
   console.log('Server running on port ' + PORT);
+  pollMessages()
+    .then(() => console.log('Listener de SQS iniciado.'))
+    .catch((error) => {
+      console.error('Error iniciando el listener de SQS:', error);
+      process.exit(1); // Salir si el listener falla
+    });
 });
 
 module.exports = app;
