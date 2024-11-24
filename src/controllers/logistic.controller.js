@@ -24,6 +24,7 @@ class LogisticController {
                 fechaRealizacion,
                 barrioOrigen,
                 barrioDestino,
+                cost,
                 latOrigen,
                 lonOrigen,
                 latDestino,
@@ -37,7 +38,7 @@ class LogisticController {
             const logisticData = {
                 originStreet: barrioOrigen, // Mapeamos barrioOrigen a originStreet
                 destinationStreet: barrioDestino, // Mapeamos barrioDestino a destinationStreet
-                cost: costo, // Usamos el valor fijo para costo
+                cost: cost,// Usamos el valor fijo para costo
                 creationDate: fechaSolicitud, // Mapeamos fecha de solicitud a creationDate
                 logisticDate: fechaRealizacion, // Mapeamos fecha de realización a logisticDate
                 type: 0, // Asumiendo que siempre será de casa a casa, si no, puedes ajustar esto
