@@ -49,7 +49,7 @@ async function processMessage(message) {
       } else if(detailType === 'UsuarioModificado') {
         await userService.updateUser(user.cuit, user);
       }
-    } else if(detailType === 'InmueblCreado') {
+    } else if(detailType === 'PublicacionCreada') {
       console.log('Procesando mensaje de inmueble');
       const asset = {
         _id: detail.id,
@@ -63,7 +63,7 @@ async function processMessage(message) {
         longitude: detail.longitude,
         owner_id: detail.user_id,
         address: detail.address,
-        address: detail.zipcode,
+        zipcode: detail.zipcode,
         dayAvailability: [1,2,3,4,5],
         hoursAvailability: {
           startHour: 9,
@@ -75,7 +75,7 @@ async function processMessage(message) {
       
     }
   } catch(err) {
-    console.log(error);
+    console.log(err);
   }
 }
 
