@@ -46,6 +46,7 @@ class LogisticController {
                 // Si tienes datos adicionales como muebles o trabajadores, agrégales valores predeterminados
                 furnitures: [], // Aquí deberías mapear los muebles si están disponibles
                 workersId: [], // Aquí deberías mapear los trabajadores si están disponibles
+                state: 'Pendiente',
             };
     
             // Crear la logística (solicitud de mudanza)
