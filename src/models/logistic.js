@@ -14,7 +14,8 @@ const LogisticSchema = new Schema({
     type: Number, //0: los muebles van de una casa a otra, 1: muebles pasan por un deposito
     furnitures: [{ type: mongoose.Schema.ObjectId, ref:'furniture'}],
     workersId: [{ type: mongoose.Schema.ObjectId, ref:'worker'}],
-    userId: {type: mongoose.Schema.ObjectId, ref:'user'}
+    userId: {type: mongoose.Schema.ObjectId, ref:'user'},
+    state: String, //al crear la mudanza state: pendiente, cuando se paga la mudanza se cambia a Confirmada 
 });
 
 const Logistic = mongoose.model('Logistic',LogisticSchema);

@@ -3,6 +3,7 @@ const { credentials } = require("./credentials");
 const winston = require("winston");
 const userService = require('../services/user.service');
 const assetService = require('../services/asset.service');
+const logisticService = require('../services/logistic.service');
 
 const client = new SQSClient({
   region: "us-east-1", // Cambia por tu región
@@ -73,6 +74,16 @@ async function processMessage(message) {
       const newAsset = await assetService.postAsset(asset);
       console.log(newAsset);
       
+    } else if(detailType === 'PagoCancelado') {
+      const user = userService.findUserById(detail.idPagador);
+      const logistic = logisticService.getLogisticsByUserId(user._id);
+      const deletedLogistic = await logisticService.deleteLogistic(logistic._id);
+      console.log(deletedLogistic);
+    } else if(detailType === 'PagoMudanzaCreado') {
+      const user = userService.findUserById(detail.idPagador);
+      const logistic = logisticService.getLogisticsByUserId(user._id);
+      const updatedLogistic = await logisticService.updateLogistic(logistic._id, { state: 'Confirmada' });
+      console.log(updatedLogistic);
     }
   } catch(err) {
     console.log(err);
