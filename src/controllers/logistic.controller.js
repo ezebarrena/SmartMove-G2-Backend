@@ -32,7 +32,6 @@ class LogisticController {
                 idUsuarioMudanza
             } = req.body;
     
-            const costo = 2500; // Valor hardcodeado
     
             // Mapear los datos del evento a los campos del modelo de logística
             const logisticData = {
