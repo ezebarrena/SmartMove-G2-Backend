@@ -55,36 +55,10 @@ class LogisticController {
             await logisticService.createLogistic(newLogistic);
     
             // Enviar el evento MudanzaSolicitada
-            await publicarMudanzaSolicitada(
-                idMudanza,
-                fechaSolicitud,
-                fechaRealizacion,
-                costo,
-                barrioOrigen,
-                barrioDestino,
-                latOrigen,
-                lonOrigen,
-                latDestino,
-                lonDestino,
-                idUsuarioSolicita,
-                idUsuarioMudanza
-            );
+            await publicarMudanzaSolicitada(logisticData);
     
             // Llamar al evento ContratoMudanzaCompletada
-            await publicarContratoMudanzaCompletada(
-                idMudanza,
-                fechaSolicitud,
-                fechaRealizacion,
-                costo, 
-                barrioOrigen,
-                barrioDestino,
-                latOrigen,
-                lonOrigen,
-                latDestino,
-                lonDestino,
-                idUsuarioSolicita,
-                idUsuarioMudanza
-            );
+            await publicarContratoMudanzaCompletada(logisticData);
     
             return res.status(201).json({
                 message: "Created, Events Sent!",
