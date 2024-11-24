@@ -51,6 +51,7 @@ class AssetService {
 
     //publica un inmueble
     async postAsset(asset) {
+      console.log(asset);
         try {
             await AssetModel.create(asset);
             return asset;
