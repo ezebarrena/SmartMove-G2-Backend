@@ -35,11 +35,9 @@ class VisitController {
             const userId = req.user.cuit;            
             const user = await userService.findUserById(userId); 
             const visitData = req.body;
-            visitData.state = "Pendiente"
+            visitData.state = "Pendiente" //al crear la visita, siempre se crea en estado Pendiente
             visitData.userId = user._id;
-            visitData.isAudit = req.user.is_admin;
-            //al crear la visita, siempre se crea en estado Pendiente
-            console.log(visitData);
+            visitData.isAudit = user.is_admin;
             
             let newVisit = await visitService.createVisit(visitData)
             return res.status(201).json({
