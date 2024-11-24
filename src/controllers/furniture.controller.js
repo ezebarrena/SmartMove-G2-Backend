@@ -70,7 +70,7 @@ class FurnitureController {
 
     async getFurnitureByUser(req, res) {
         try {
-            const userId = req.user.id;
+            const userId = req.params.id;
             const furnitureList = await furnitureService.getFurnitureByUser(userId);
             
             if (furnitureList.length === 0) {

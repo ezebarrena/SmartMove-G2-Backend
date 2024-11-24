@@ -53,7 +53,7 @@ class AssetController {
   
           return res.status(200).json({
               message: "Asset found.",
-              asset: asset[0],
+              asset: asset,
               status: 200,
           });
       } catch (err) {
