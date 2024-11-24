@@ -1094,6 +1094,18 @@
 {"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T17:08:59.262Z"}
 {"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T17:09:24.368Z"}
 {"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T17:09:24.451Z"}
+<<<<<<< HEAD
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T19:09:39.436Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T19:09:39.439Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T19:10:04.602Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T19:10:04.603Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T19:10:29.775Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T19:10:29.781Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T19:10:54.948Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T19:10:54.998Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T19:11:20.114Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T19:11:20.180Z"}
+=======
 {"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T17:09:55.907Z"}
 {"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T17:09:55.910Z"}
 {"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T17:10:21.085Z"}
@@ -5263,3 +5275,4 @@
 {"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T19:27:27.902Z"}
 {"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T19:27:40.660Z"}
 {"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T19:27:53.082Z"}
+>>>>>>> 32377d620e34f7cacf4999f7e3bca625eff99d5a
