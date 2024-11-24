@@ -70,7 +70,6 @@ async function processMessage(message) {
           endHour: 18
         }
       };
-      console.log(asset);
       const newAsset = await assetService.postAsset(asset);
       console.log(newAsset);
       
