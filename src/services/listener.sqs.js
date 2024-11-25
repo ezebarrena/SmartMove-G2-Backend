@@ -50,7 +50,7 @@ async function processMessage(message) {
       } else if(detailType === 'UsuarioModificado') {
         await userService.updateUser(user.cuit, user);
       }
-    } else if(detailType === 'PublicacionCreada') {
+    } else if(detailType === 'PublicacionCreada' || detailType === 'PublicacionActualizada') {
       console.log('Procesando mensaje de inmueble');
       const asset = {
         _id: detail.id,
@@ -71,9 +71,27 @@ async function processMessage(message) {
           endHour: 18
         }
       };
-      const newAsset = await assetService.postAsset(asset);
-      console.log(newAsset);
-      
+      if(detailType === 'PublicacionCreada') {
+        const newAsset = await assetService.postAsset(asset);
+        console.log(newAsset);
+      } else if(detailType === 'PublicacionActualizada') {
+        const assetToUpdate = {
+          beds: detail.beds,
+          bathrooms: detail.bathrooms,
+          district: detail.district,
+          rooms: detail.rooms,
+          title: detail.title,
+          description: detail.description,
+          latitude: detail.latitude,
+          longitude: detail.longitude,
+          owner_id: detail.user_id,
+          address: detail.address,
+          zipcode: detail.zipcode,
+        };
+        const updatedAsset = await assetService.updateAssetById(detail.id, assetToUpdate);
+        console.log(updatedAsset);
+      }
+
     } else if(detailType === 'PagoCancelado') {
       const user = await userService.findUserById(detail.idPagador);
       const logistic = await logisticService.getLogisticsByUserId(user._id);
