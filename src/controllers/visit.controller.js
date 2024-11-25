@@ -35,7 +35,7 @@ class VisitController {
             const userId = req.user.cuit;            
             const user = await userService.findUserById(userId); 
             const visitData = req.body;
-            visitData.state = "Pendiente" //al crear la visita, siempre se crea en estado Pendiente
+            visitData.state = user.is_admin ? "Confirmada" : "Pendiente" //al crear la visita, siempre se crea en estado Pendiente salvo que el user sea auditor
             visitData.userId = user._id;
             visitData.isAudit = user.is_admin;
             
