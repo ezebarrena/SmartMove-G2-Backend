@@ -36,7 +36,8 @@ class LogisticController {
                 lonDestino,
                 idUsuarioSolicita,
                 idUsuarioMudanza,
-                userId
+                userId,
+                type
             } = req.body;
     
     
@@ -51,7 +52,7 @@ class LogisticController {
                 cost: cost,// Usamos el valor fijo para costo
                 creationDate: creationDate, // Mapeamos fecha de solicitud a creationDate
                 logisticDate: logisticDate, // Mapeamos fecha de realización a logisticDate
-                type: 0, // Asumiendo que siempre será de casa a casa, si no, puedes ajustar esto
+                type: type,
                 userId: userId, // Mapeamos el ID del usuario que solicita
                 // Si tienes datos adicionales como muebles o trabajadores, agrégales valores predeterminados
                 furnitures: furnitures, // Aquí deberías mapear los muebles si están disponibles
