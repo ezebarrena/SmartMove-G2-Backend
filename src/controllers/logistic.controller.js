@@ -53,7 +53,8 @@ class LogisticController {
                 creationDate: creationDate, // Mapeamos fecha de solicitud a creationDate
                 logisticDate: logisticDate, // Mapeamos fecha de realización a logisticDate
                 type: type,
-                userId: userId, // Mapeamos el ID del usuario que solicita
+                //userId: userId, // Mapeamos el ID del usuario que solicita
+                userId: user.cuit,
                 // Si tienes datos adicionales como muebles o trabajadores, agrégales valores predeterminados
                 furnitures: furnitures, // Aquí deberías mapear los muebles si están disponibles
                 workersId: [], // Aquí deberías mapear los trabajadores si están disponibles
