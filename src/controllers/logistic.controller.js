@@ -2,6 +2,7 @@ const Logistic = require("../models/logistic")
 const logisticService = require("../services/logistic.service")
 const { publicarMudanzaSolicitada } = require("../services/event.service")
 const { publicarContratoMudanzaCompletada } = require("../services/event.service")
+const userService = require('../services/user.service');
 
 
 let instance = null
@@ -37,6 +38,7 @@ class LogisticController {
                 idUsuarioSolicita,
                 idUsuarioMudanza,
                 userId,
+                userCuit,
                 type
             } = req.body;
     
@@ -54,7 +56,7 @@ class LogisticController {
                 logisticDate: logisticDate, // Mapeamos fecha de realización a logisticDate
                 type: type,
                 //userId: userId, // Mapeamos el ID del usuario que solicita
-                userId: user.cuit,
+                userId: userId,
                 // Si tienes datos adicionales como muebles o trabajadores, agrégales valores predeterminados
                 furnitures: furnitures, // Aquí deberías mapear los muebles si están disponibles
                 workersId: [], // Aquí deberías mapear los trabajadores si están disponibles
@@ -73,11 +75,36 @@ class LogisticController {
             // Llamar al servicio para crear la solicitud de mudanza
             await logisticService.createLogistic(newLogistic);
     
+            const logisticToEvent = {
+                idMudanza: idMudanza,
+                originStreet: originStreet, // Mapeamos barrioOrigen a originStreet
+                totalWeight: totalWeight,
+                originDistrict: originDistrict,
+                destinationDistrict: destinationDistrict,
+                destinationStreet: destinationStreet, // Mapeamos barrioDestino a destinationStreet
+                cost: cost,// Usamos el valor fijo para costo
+                creationDate: creationDate, // Mapeamos fecha de solicitud a creationDate
+                logisticDate: logisticDate, // Mapeamos fecha de realización a logisticDate
+                type: type,
+                //userId: userId, // Mapeamos el ID del usuario que solicita
+                userId: userCuit,
+                // Si tienes datos adicionales como muebles o trabajadores, agrégales valores predeterminados
+                furnitures: furnitures, // Aquí deberías mapear los muebles si están disponibles
+                workersId: [], // Aquí deberías mapear los trabajadores si están disponibles
+                state: 'Pendiente',
+                latOrigen: '-34.55843636557728',
+                lonOrigen: '-58.464772727458836',
+                latDestino: '-34.55843636555126',
+                lonDestino: '-58.464772727445825',
+                idUsuarioSolicita: idUsuarioSolicita,
+                idUsuarioMudanza: '20111111112',
+            }
+
             // Enviar el evento MudanzaSolicitada
-            await publicarMudanzaSolicitada(logisticData);
+            await publicarMudanzaSolicitada(logisticToEvent);
     
             // Llamar al evento ContratoMudanzaCompletada
-            await publicarContratoMudanzaCompletada(logisticData);
+            await publicarContratoMudanzaCompletada(logisticToEvent);
     
             return res.status(201).json({
                 message: "Created, Events Sent!",
