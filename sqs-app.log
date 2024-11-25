@@ -5296,3 +5296,21 @@
 {"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T22:40:02.882Z"}
 {"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T22:40:28.042Z"}
 {"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T22:40:28.047Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T22:40:53.209Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T22:40:53.214Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T22:41:18.385Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T22:41:18.386Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T22:41:43.543Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T22:41:43.545Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T22:42:08.714Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T22:42:08.717Z"}
+{"level":"info","message":"Mensajes recibidos (1)","timestamp":"2024-11-24T22:42:32.094Z"}
+{"level":"info","message":"Procesando mensaje: {\"version\":\"0\",\"id\":\"7aafab39-c38b-4729-e656-e65aa9a390e2\",\"detail-type\":\"UsuarioEliminado\",\"source\":\"SmartMove\",\"account\":\"205930646901\",\"time\":\"2024-11-24T22:41:47Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"userId\":\"12345678902\"}}","timestamp":"2024-11-24T22:42:32.095Z"}
+{"level":"info","message":"Mensaje eliminado de la cola.","timestamp":"2024-11-24T22:42:32.258Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T22:42:34.359Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T22:42:57.429Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T22:42:59.525Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T22:43:22.594Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T22:43:24.693Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T22:43:47.754Z"}
+{"level":"info","message":"No hay mensajes en la cola.","timestamp":"2024-11-24T22:43:49.861Z"}
