@@ -23,6 +23,8 @@ const publicarMudanzaSolicitada = async (idMudanza, fechaSolicitud, fechaRealiza
     idUsuarioMudanza
   };
 
+
+
   const params = {
     Entries: [
       {
@@ -81,5 +83,6 @@ const publicarContratoMudanzaCompletada = async (idMudanza, fechaSolicitud, fech
 };
 
 module.exports = {
-  publicarMudanzaSolicitada
+  publicarMudanzaSolicitada,
+  publicarContratoMudanzaCompletada
 };

@@ -20,33 +20,49 @@ class LogisticController {
             // Obtener los datos de la solicitud de mudanza desde el body de la petición
             const {
                 idMudanza,
-                fechaSolicitud,
-                fechaRealizacion,
-                barrioOrigen,
-                barrioDestino,
+                creationDate,
+                logisticDate,
+                furnitureDate,
+                originDistrict,
+                destinationDistrict,
+                originStreet,
+                destinationStreet,
+                cost,
+                furnitures,
+                totalWeight,
                 latOrigen,
                 lonOrigen,
                 latDestino,
                 lonDestino,
                 idUsuarioSolicita,
-                idUsuarioMudanza
+                idUsuarioMudanza,
+                userId
             } = req.body;
     
-            const costo = 2500; // Valor hardcodeado
     
             // Mapear los datos del evento a los campos del modelo de logística
             const logisticData = {
-                originStreet: barrioOrigen, // Mapeamos barrioOrigen a originStreet
-                destinationStreet: barrioDestino, // Mapeamos barrioDestino a destinationStreet
-                cost: costo, // Usamos el valor fijo para costo
-                creationDate: fechaSolicitud, // Mapeamos fecha de solicitud a creationDate
-                logisticDate: fechaRealizacion, // Mapeamos fecha de realización a logisticDate
+                idMudanza: idMudanza,
+                originStreet: originStreet, // Mapeamos barrioOrigen a originStreet
+                totalWeight: totalWeight,
+                originDistrict: originDistrict,
+                destinationDistrict: destinationDistrict,
+                destinationStreet: destinationStreet, // Mapeamos barrioDestino a destinationStreet
+                cost: cost,// Usamos el valor fijo para costo
+                creationDate: creationDate, // Mapeamos fecha de solicitud a creationDate
+                logisticDate: logisticDate, // Mapeamos fecha de realización a logisticDate
                 type: 0, // Asumiendo que siempre será de casa a casa, si no, puedes ajustar esto
-                userId: idUsuarioSolicita, // Mapeamos el ID del usuario que solicita
+                userId: userId, // Mapeamos el ID del usuario que solicita
                 // Si tienes datos adicionales como muebles o trabajadores, agrégales valores predeterminados
-                furnitures: [], // Aquí deberías mapear los muebles si están disponibles
+                furnitures: furnitures, // Aquí deberías mapear los muebles si están disponibles
                 workersId: [], // Aquí deberías mapear los trabajadores si están disponibles
                 state: 'Pendiente',
+                latOrigen: '-34.55843636557728',
+                lonOrigen: '-58.464772727458836',
+                latDestino: '-34.55843636555126',
+                lonDestino: '-58.464772727445825',
+                idUsuarioSolicita: idUsuarioSolicita,
+                idUsuarioMudanza: '20111111112',
             };
     
             // Crear la logística (solicitud de mudanza)
