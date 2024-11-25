@@ -23,6 +23,8 @@ const publicarMudanzaSolicitada = async (idMudanza, fechaSolicitud, fechaRealiza
     idUsuarioMudanza
   };
 
+
+
   const params = {
     Entries: [
       {

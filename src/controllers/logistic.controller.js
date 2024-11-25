@@ -42,6 +42,7 @@ class LogisticController {
     
             // Mapear los datos del evento a los campos del modelo de logística
             const logisticData = {
+                idMudanza: idMudanza,
                 originStreet: originStreet, // Mapeamos barrioOrigen a originStreet
                 totalWeight: totalWeight,
                 originDistrict: originDistrict,
@@ -56,6 +57,12 @@ class LogisticController {
                 furnitures: furnitures, // Aquí deberías mapear los muebles si están disponibles
                 workersId: [], // Aquí deberías mapear los trabajadores si están disponibles
                 state: 'Pendiente',
+                latOrigen: '-34.55843636557728',
+                lonOrigen: '-58.464772727458836',
+                latDestino: '-34.55843636555126',
+                lonDestino: '-58.464772727445825',
+                idUsuarioSolicita: idUsuarioSolicita,
+                idUsuarioMudanza: '20111111112',
             };
     
             // Crear la logística (solicitud de mudanza)
