@@ -45,7 +45,7 @@ class LogisticController {
     
             // Mapear los datos del evento a los campos del modelo de logística
             const logisticData = {
-                idMudanza: idMudanza,
+                idMudanza: _id,
                 originStreet: originStreet, // Mapeamos barrioOrigen a originStreet
                 totalWeight: totalWeight,
                 originDistrict: originDistrict,
@@ -76,7 +76,7 @@ class LogisticController {
             await logisticService.createLogistic(newLogistic);
     
             const logisticToEvent = {
-                idMudanza: idMudanza,
+                idMudanza: _id,
                 originStreet: originStreet, // Mapeamos barrioOrigen a originStreet
                 totalWeight: totalWeight,
                 originDistrict: originDistrict,
