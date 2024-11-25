@@ -75,13 +75,13 @@ async function processMessage(message) {
       console.log(newAsset);
       
     } else if(detailType === 'PagoCancelado') {
-      const user = userService.findUserById(detail.idPagador);
-      const logistic = logisticService.getLogisticsByUserId(user._id);
+      const user = await userService.findUserById(detail.idPagador);
+      const logistic = await logisticService.getLogisticsByUserId(user._id);
       const deletedLogistic = await logisticService.deleteLogistic(logistic._id);
       console.log(deletedLogistic);
     } else if(detailType === 'PagoMudanzaCreado') {
-      const user = userService.findUserById(detail.idPagador);
-      const logistic = logisticService.getLogisticsByUserId(user._id);
+      const user = await userService.findUserById(detail.idPagador);
+      const logistic = await logisticService.getLogisticsByUserId(user._id);
       const updatedLogistic = await logisticService.updateLogistic(logistic._id, { state: 'Confirmada' });
       console.log(updatedLogistic);
     }
